@@ -67,7 +67,7 @@ export const checkLoginCredentials = (email, password) => {
       body: JSON.stringify({email: email, password: password})
     }).then((resp) => {
       if (resp.ok) {
-        return response.json();
+        return resp.json();
       } else {
         dispatch({ type: LOGIN_FAILED, payload: { errorMsg: "Unable to login. Please try again later." } })
       }
