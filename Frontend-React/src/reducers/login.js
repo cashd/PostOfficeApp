@@ -1,3 +1,5 @@
+import history from '../store'
+
 export const UPDATE_PASSWORD_FIELD = 'login/UPDATE_PASSWORD_FIELD';
 export const UPDATE_EMAIL_FIELD = 'login/UPDATE_EMAIL_FIELD';
 export const REQUEST_LOGIN = 'login/REQUEST_LOGIN';
@@ -29,6 +31,10 @@ export default (state = initialState, action) => {
         ...state,
         errorMsg: action.payload.errorMsg
       };
+    case LOGIN_SUCCESS:
+      return {
+        ...state,
+      };
     default:
       return state
   }
@@ -52,13 +58,23 @@ export const checkLoginCredentials = (email, password) => {
 
     // Check email and password not null
     // Check email regex
-    fetch('https://api.team9postoffice.ga/auth', {
+    const response = fetch('http://api.team9postoffice.ga/auth', {
       method: 'post',
       headers: {
         'Accept': 'application/json, text/plain, */*',
         'Content-Type': 'application/json'
       },
       body: JSON.stringify({email: email, password: password})
-    }).then(resp => resp.json()).then(resp => console.log(resp))
+    }).then((resp) => {
+      if (resp.ok) {
+        return response.json();
+      } else {
+        dispatch({ type: LOGIN_FAILED, payload: { errorMsg: "Unable to login. Please try again later." } })
+      }
+    }).then((respJSON) => {
+      console.log(respJSON)
+      dispatch({ type: LOGIN_SUCCESS })
+      dispatch(history.push('/'))
+    })
   }
 };
