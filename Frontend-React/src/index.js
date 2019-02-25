@@ -8,7 +8,7 @@ import App from './containers/app'
 import 'sanitize.css/sanitize.css'
 import './index.css'
 
-const target = document.querySelector('#root')
+const target = document.querySelector('#root');
 
 render(
   <Provider store={store}>
@@ -19,4 +19,4 @@ render(
     </ConnectedRouter>
   </Provider>,
   target
-)
+);
