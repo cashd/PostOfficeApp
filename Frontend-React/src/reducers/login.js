@@ -52,7 +52,7 @@ export const checkLoginCredentials = (email, password) => {
 
     // Check email and password not null
     // Check email regex
-    fetch('http://api.team9postoffice.ga/auth', {
+    fetch('https://api.team9postoffice.ga/auth', {
       method: 'post',
       headers: {
         'Accept': 'application/json, text/plain, */*',
