@@ -73,8 +73,12 @@ export const checkLoginCredentials = (email, password) => {
       }
     }).then((respJSON) => {
       console.log(respJSON)
-      dispatch({ type: LOGIN_SUCCESS })
-      push('/')
+      if (respJSON.isAuth) {
+        dispatch({ type: LOGIN_SUCCESS })
+        dispatch(push('/'))
+      } else {
+         dispatch({ type: LOGIN_FAILED, payload: { errorMsg: "Incorrect credentials." } })
+      }
     })
   }
 };
