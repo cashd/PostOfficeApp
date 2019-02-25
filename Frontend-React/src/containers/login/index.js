@@ -1,7 +1,7 @@
 import React from 'react'
 import Form from 'react-bootstrap/Form'
 import Button from 'react-bootstrap/Button'
-import { updatePasswordField, updateEmailField, checkLoginCredinials } from "../../reducers/login";
+import { updatePasswordField, updateEmailField, checkLoginCredentials } from "../../reducers/login";
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
 
@@ -20,6 +20,7 @@ class Login extends React.Component {
     handleSubmitClick = () => {
         console.log(this.props.email);
         console.log(this.props.password);
+        this.props.checkLoginCredentials(this.props.email, this.props.password)
     };
 
     render() {
@@ -66,7 +67,7 @@ const mapDispatchToProps = dispatch =>
       {
           updatePasswordField,
           updateEmailField,
-          checkLoginCredinials
+          checkLoginCredentials,
       },
     dispatch
   );

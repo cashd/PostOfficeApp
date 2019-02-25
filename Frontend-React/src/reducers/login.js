@@ -46,7 +46,7 @@ export const updateEmailField = (email) => {
   }
 };
 
-export const checkLoginCredinials= (email, password) => {
+export const checkLoginCredentials = (email, password) => {
   return dispatch => {
     dispatch({ type: REQUEST_LOGIN });
 
