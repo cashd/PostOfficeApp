@@ -1,4 +1,4 @@
-import history from '../store'
+import { push } from 'connected-react-router'
 
 export const UPDATE_PASSWORD_FIELD = 'login/UPDATE_PASSWORD_FIELD';
 export const UPDATE_EMAIL_FIELD = 'login/UPDATE_EMAIL_FIELD';
@@ -58,7 +58,7 @@ export const checkLoginCredentials = (email, password) => {
 
     // Check email and password not null
     // Check email regex
-    const response = fetch('http://api.team9postoffice.ga/auth', {
+    const response = fetch('https://api.team9postoffice.ga/auth', {
       method: 'post',
       headers: {
         'Accept': 'application/json, text/plain, */*',
@@ -74,7 +74,7 @@ export const checkLoginCredentials = (email, password) => {
     }).then((respJSON) => {
       console.log(respJSON)
       dispatch({ type: LOGIN_SUCCESS })
-      dispatch(history.push('/'))
+      push('/')
     })
   }
 };
