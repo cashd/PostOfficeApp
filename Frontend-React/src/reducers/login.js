@@ -52,6 +52,7 @@ export const updateEmailField = (email) => {
   }
 };
 
+// TODO : CORS Credentials = Include
 export const checkLoginCredentials = (email, password) => {
   return dispatch => {
     dispatch({ type: REQUEST_LOGIN });
