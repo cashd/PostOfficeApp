@@ -17,6 +17,6 @@ const App = () => (
       <Route exact path="/login" component={Login} />
     </main>
   </div>
-)
+);
 
 export default App

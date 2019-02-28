@@ -1,6 +1,7 @@
 import React from 'react'
 import Form from 'react-bootstrap/Form'
 import Button from 'react-bootstrap/Button'
+import Alert from 'react-bootstrap/Alert'
 import { updatePasswordField, updateEmailField, checkLoginCredentials } from "../../reducers/login";
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
@@ -36,6 +37,8 @@ class Login extends React.Component {
 
     render() {
         return <div style={divStyle}>
+
+            { this.props.error.is ? (<Alert dismissible variant="danger" > <Alert.Heading>Login Error!</Alert.Heading></Alert>): null }
             <Form style={formStyle}>
               <Form.Group controlId="formBasicEmail">
                 <Form.Label>Email address</Form.Label>
@@ -71,6 +74,7 @@ const formStyle = {
 const mapStateToProps = ({ login }) => ({
     email: login.email,
     password: login.password,
+    error: login.error,
 });
 
 const mapDispatchToProps = dispatch =>

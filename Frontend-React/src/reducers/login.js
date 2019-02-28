@@ -9,7 +9,7 @@ export const LOGIN_SUCCESS = 'login/LOGIN_SUCCESS';
 const initialState = {
   email: "",
   password: "",
-  errorMsg: "",
+  error: { is: false, msg: "" },
 };
 
 export default (state = initialState, action) => {
@@ -29,7 +29,7 @@ export default (state = initialState, action) => {
     case LOGIN_FAILED:
       return {
         ...state,
-        errorMsg: action.payload.errorMsg
+        error: action.payload.error
       };
     case LOGIN_SUCCESS:
       return {
@@ -71,7 +71,7 @@ export const checkLoginCredentials = (email, password) => {
       if (resp.ok) {
         return resp.json();
       } else {
-        dispatch({ type: LOGIN_FAILED, payload: { errorMsg: "Unable to login. Please try again later." } })
+        dispatch({ type: LOGIN_FAILED, payload: { error: { is: true, msg: "Server Error. Please try again later." } } })
       }
     }).then((respJSON) => {
       console.log(respJSON)
@@ -79,7 +79,7 @@ export const checkLoginCredentials = (email, password) => {
         dispatch({ type: LOGIN_SUCCESS })
         dispatch(push('/'))
       } else {
-         dispatch({ type: LOGIN_FAILED, payload: { errorMsg: "Incorrect credentials." } })
+         dispatch({ type: LOGIN_FAILED, payload: { error: { is: true, msg: "Invalid Credentials." } } })
       }
     })
   }
