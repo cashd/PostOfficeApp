@@ -1,5 +1,4 @@
 import { push } from 'connected-react-router'
-import Cookie from 'js-cookie'
 
 export const UPDATE_PASSWORD_FIELD = 'login/UPDATE_PASSWORD_FIELD';
 export const UPDATE_EMAIL_FIELD = 'login/UPDATE_EMAIL_FIELD';
@@ -56,8 +55,6 @@ export const updateEmailField = (email) => {
 // TODO : CORS Credentials = Include
 export const checkLoginCredentials = (email, password) => {
   return dispatch => {
-    Cookie.set('user_id', 1)
-    Cookie.set('role', 'Customer')
     dispatch({ type: REQUEST_LOGIN });
 
     // Check email and password not null
