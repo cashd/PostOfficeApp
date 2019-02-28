@@ -38,7 +38,7 @@ class Login extends React.Component {
     render() {
         return <div style={divStyle}>
 
-            { this.props.error.is ? (<Alert dismissible variant="danger" > <Alert.Heading>Login Error!</Alert.Heading></Alert>): null }
+            { this.props.error.is ? (<Alert variant="danger" > <Alert.Heading>Login Error!</Alert.Heading><p>Your email or password is incorrect. Try again.</p></Alert>): null }
             <Form style={formStyle}>
               <Form.Group controlId="formBasicEmail">
                 <Form.Label>Email address</Form.Label>
