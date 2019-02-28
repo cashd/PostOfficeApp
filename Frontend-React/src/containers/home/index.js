@@ -2,56 +2,46 @@ import React from 'react'
 import { push } from 'connected-react-router'
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
-import {
-  increment,
-  incrementAsync,
-  decrement,
-  decrementAsync
-} from '../../reducers/counter'
+import { getRoleCookie } from '../../reducers/home'
+import CustomerHome from '../customerHome'
 
 class Home extends React.Component {
+    constructor(props) {
+    super(props);
+    this.props.getRoleCookie()
+    }
+
+
     render() {
+        const role = this.props.role;
+        console.log(role)
+        let home;
+        if (role === 'Customer') {
+            home =  <CustomerHome  />
+        }
+        else if (role === 'Facility') {
+            home =  <p>Facility Home</p>
+        }
+        else if (role === 'Truck') {
+            home =  <p>Truck Home</p>
+        } else {
+            this.props.pushLogin()
+        }
         return <div>
-    <h1>Home</h1>
-    <p>Count: {this.props.count}</p>
-
-    <p>
-      <button onClick={this.props.increment}>Increment</button>
-      <button onClick={this.props.incrementAsync} disabled={this.props.isIncrementing}>
-        Increment Async
-      </button>
-    </p>
-
-    <p>
-      <button onClick={this.props.decrement}>Decrement</button>
-      <button onClick={this.props.decrementAsync} disabled={this.props.isDecrementing}>
-        Decrement Async
-      </button>
-    </p>
-
-    <p>
-      <button onClick={() => this.props.changePage()}>
-        Go to about page via redux
-      </button>
-    </p>
+            {home}
   </div>
     }
 }
 
-const mapStateToProps = ({ counter }) => ({
-  count: counter.count,
-  isIncrementing: counter.isIncrementing,
-  isDecrementing: counter.isDecrementing
+const mapStateToProps = ({ home }) => ({
+  role: home.role,
 });
 
 const mapDispatchToProps = dispatch =>
   bindActionCreators(
     {
-      increment,
-      incrementAsync,
-      decrement,
-      decrementAsync,
-      changePage: () => push('/about-us')
+      getRoleCookie,
+        pushLogin: () => push('login'),
     },
     dispatch
   );

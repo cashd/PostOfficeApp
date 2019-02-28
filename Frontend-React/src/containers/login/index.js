@@ -4,6 +4,8 @@ import Button from 'react-bootstrap/Button'
 import { updatePasswordField, updateEmailField, checkLoginCredentials } from "../../reducers/login";
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
+import Cookie from 'js-cookie'
+import { push } from 'connected-react-router'
 
 class Login extends React.Component {
 
@@ -22,6 +24,15 @@ class Login extends React.Component {
         console.log(this.props.password);
         this.props.checkLoginCredentials(this.props.email, this.props.password)
     };
+
+    componentDidMount() {
+        const credId = Cookie.get('user_id')
+        const credRole = Cookie.get('role')
+        console.log(credRole, credId)
+        if (credId && credRole) {
+            this.props.pushHome()
+        }
+    }
 
     render() {
         return <div style={divStyle}>
@@ -68,6 +79,7 @@ const mapDispatchToProps = dispatch =>
           updatePasswordField,
           updateEmailField,
           checkLoginCredentials,
+          pushHome: () => push('/'),
       },
     dispatch
   );
