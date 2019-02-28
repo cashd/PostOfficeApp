@@ -61,10 +61,10 @@ export const checkLoginCredentials = (email, password) => {
     // Check email regex
     fetch('https://api.team9postoffice.ga/auth', {
       method: 'post',
+      'credentials': 'include',
       headers: {
-        'Accept': 'application/json, text/plain, */*',
-        'Content-Type': 'application/json',
-        'credentials': 'include',
+        'accept': 'application/json, text/plain, */*',
+        'content-type': 'application/json',
       },
       body: JSON.stringify({email: email, password: password})
     }).then((resp) => {
