@@ -7,9 +7,9 @@ export const LOGIN_FAILED = 'login/LOGIN_FAILED';
 export const LOGIN_SUCCESS = 'login/LOGIN_SUCCESS';
 
 const initialState = {
-  email: "",
-  password: "",
-  error: { is: false, msg: "" },
+    email: "",
+    password: "",
+    error: { is: false, msg: "" },
 };
 
 export default (state = initialState, action) => {

@@ -5,7 +5,7 @@ import Alert from 'react-bootstrap/Alert'
 import { updatePasswordField, updateEmailField, checkLoginCredentials } from "../../reducers/login";
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
-import Cookie from 'js-cookie'
+import { isAuth } from '../../utils/auth'
 import { push } from 'connected-react-router'
 
 class Login extends React.Component {
@@ -27,10 +27,7 @@ class Login extends React.Component {
     };
 
     componentDidMount() {
-        const credId = Cookie.get('user_id')
-        const credRole = Cookie.get('role')
-        console.log(credRole, credId)
-        if (credId && credRole) {
+        if (isAuth()) {
             this.props.pushHome()
         }
     }

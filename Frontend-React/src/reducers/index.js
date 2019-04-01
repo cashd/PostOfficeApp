@@ -1,11 +1,11 @@
 import { combineReducers } from 'redux'
-import counter from './counter'
 import login from './login'
 import home from './home'
+import signup from './signup'
 
 
 export default combineReducers({
-  counter,
   login,
-  home
+  home,
+  signup
 })
