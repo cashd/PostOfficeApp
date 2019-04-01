@@ -1,0 +1,107 @@
+[33mcommit b177171b8c0d4f21a9e5c8f2f477282942b6c2dd[m[33m ([m[1;36mHEAD -> [m[1;32mmaster[m[33m, [m[1;31morigin/master[m[33m, [m[1;31morigin/HEAD[m[33m)[m
+Author: Cash DeLeon <cashd@users.noreply.github.com>
+Date:   Sun Mar 31 19:45:48 2019 -0500
+
+    signup n windows dev
+
+[33mcommit 8f8d101cc536cdd76febfdce58023721213dd506[m
+Author: Cash DeLeon <cashadeleon@gmail.com>
+Date:   Thu Feb 28 09:22:04 2019 +0000
+
+    removed diss on danger
+
+[33mcommit f409239c85cc32dba555103afa107bc95ea38be1[m
+Author: Cash DeLeon <cashadeleon@gmail.com>
+Date:   Thu Feb 28 03:17:38 2019 -0600
+
+    login error msg
+
+[33mcommit 6f524cb233832510d94cd80c2e390dec4b18e54d[m
+Author: Cash DeLeon <cashadeleon@gmail.com>
+Date:   Thu Feb 28 02:07:21 2019 -0600
+
+    removed double cookie for local bug
+
+[33mcommit 1f763369b9051edbb74f91f2de1f3b20075a835c[m
+Author: Cash DeLeon <cashadeleon@gmail.com>
+Date:   Thu Feb 28 02:01:47 2019 -0600
+
+    cond rendering of role home
+
+[33mcommit de9b8e619fcbdbd870ef86cffd643e7ba5d74c0c[m
+Author: Cash DeLeon <cashadeleon@gmail.com>
+Date:   Thu Feb 28 07:07:44 2019 +0000
+
+    Fixed cors fix
+
+[33mcommit 27ec4bbe05185028bcc37352b25a28c1ccf59c1c[m
+Author: Cash DeLeon <cashadeleon@gmail.com>
+Date:   Thu Feb 28 00:52:55 2019 -0600
+
+    dep fix
+
+[33mcommit 032a339ebe987abfbc6a2818e449540cfc53a6cb[m
+Author: Cash DeLeon <cashadeleon@gmail.com>
+Date:   Thu Feb 28 00:45:35 2019 -0600
+
+    fix
+
+[33mcommit 75402322620410f03e15c54d769d123e67c77719[m
+Author: Cash DeLeon <cashadeleon@gmail.com>
+Date:   Thu Feb 28 00:42:36 2019 -0600
+
+    cookie fix
+
+[33mcommit 544ebcd02cb247e8e6158b437db478b4b84cba38[m
+Author: Cash DeLeon <cashadeleon@gmail.com>
+Date:   Mon Feb 25 18:06:41 2019 -0600
+
+    todo and ignore .cache
+
+[33mcommit b7c489c88c98771b813d14fadb733c0f993b0f5a[m
+Author: Cash DeLeon <cashadeleon@gmail.com>
+Date:   Mon Feb 25 17:54:25 2019 -0600
+
+    login
+
+[33mcommit c72ba40417521f93b763e13ef578f0c554a99b7f[m
+Author: Cash DeLeon <cashadeleon@gmail.com>
+Date:   Mon Feb 25 17:49:07 2019 -0600
+
+    typo
+
+[33mcommit 2ff8f9ffb656d090d54d8eb07e36e1cff40bdd35[m
+Author: Cash DeLeon <cashadeleon@gmail.com>
+Date:   Mon Feb 25 17:46:16 2019 -0600
+
+    auth http -> https
+
+[33mcommit 3887bfe66d29eb97370b0aec2dbb9119ea62ff7c[m
+Author: Cash DeLeon <cashadeleon@gmail.com>
+Date:   Mon Feb 25 17:41:31 2019 -0600
+
+    login error handling then push
+
+[33mcommit 911dc33d0512dbe03fd351c7fdb44ee0dc667e40[m
+Author: Cash DeLeon <cashadeleon@gmail.com>
+Date:   Mon Feb 25 08:46:11 2019 +0000
+
+    login starting to worko
+
+[33mcommit 892d89411b8d95ace5e2e1bd9ce9e324cb2f1367[m
+Author: Cash DeLeon <cashadeleon@gmail.com>
+Date:   Sun Feb 24 23:47:25 2019 -0600
+
+    login checker
+
+[33mcommit 64384124071fb615f68fee562cfd4a2b7f1398ca[m
+Author: Cash DeLeon <cashadeleon@gmail.com>
+Date:   Sun Feb 24 23:38:46 2019 -0600
+
+    started login page and added navbar
+
+[33mcommit e3040344231f7b0a0416a89094c87de8ad035c50[m
+Author: Cash DeLeon <cashadeleon@gmail.com>
+Date:   Mon Feb 18 20:53:42 2019 -0600
+
+    first commit, react front end boilerplate
