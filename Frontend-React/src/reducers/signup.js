@@ -161,6 +161,7 @@ export const updatePhoneField = (phone) => {
 
 export const submit = (customer) => {
   return dispatch => {
+    console.log(customer);
     dispatch({ type: SIGNUP_REQUEST })
     apiPost('/signup/customer', customer)
       .then(respJSON => {

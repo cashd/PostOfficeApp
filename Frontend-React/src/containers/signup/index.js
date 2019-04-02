@@ -77,14 +77,15 @@ class SignUp extends React.Component {
 
   handleSubmit = (event) => {
     this.props.submit({
-      fName: this.props.firstName,
-      lName: this.props.lastName,
+      firstName: this.props.firstName,
+      lastName: this.props.lastName,
       email: this.props.email,
       password: this.props.password,
       address: this.props.address + ' ' + this.props.address2,
       zipcode: this.props.zip,
-      state: this.props.stateUS,
-      phone: this.props.phoneNum
+      stateid: this.props.stateUS,
+      phoneNum: this.props.phoneNum,
+      cityid: this.props.city,
     })
   };
 
@@ -126,13 +127,13 @@ class SignUp extends React.Component {
             <Form.Control placeholder="1234 Main St" value={this.props.address} onChange={this.handleAddress.bind(this)} />
           </Form.Group>
           <Form.Row>
-            <Form.Group controlId="formGridAddress2">
+            <Form.Group as={Col} controlId="formGridAddress2">
             <Form.Label>Address 2</Form.Label>
             <Form.Control placeholder="Apartment, studio, or floor" value={this.props.address2} onChange={this.handleAddress2.bind(this)} />
             </Form.Group>
 
-            <Form.Group controlId="formGridPhoneNum">
-            <Form.Label>Address 2</Form.Label>
+            <Form.Group as={Col} controlId="formGridPhoneNum">
+            <Form.Label>Phone Number</Form.Label>
             <Form.Control placeholder="+1 (111) 111 - 111" value={this.props.phoneNum} onChange={this.handlePhone.bind(this)} />
             </Form.Group>
 
@@ -250,7 +251,8 @@ const mapStateToProps = ({ signup }) => ({
   zip: signup.zip,
   city: signup.city,
   firstName: signup.firstName,
-  lastName: signup.lastName
+  lastName: signup.lastName,
+  phoneNum: signup.phoneNum,
 });
 
 const mapDispatchToProps = dispatch =>
