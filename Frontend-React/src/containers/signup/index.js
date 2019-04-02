@@ -70,7 +70,15 @@ class SignUp extends React.Component {
   };
 
   handleSubmit = (event) => {
-    this.props.submit()
+    this.props.submit({
+      fName: this.props.firstName,
+      lName: this.props.lastName,
+      email: this.props.email,
+      password: this.props.password,
+      address: this.props.address + ' ' + this.props.address2,
+      zipcode: this.props.zip,
+      state: this.props.stateUS,
+    })
   };
 
   componentDidMount() {
