@@ -17,7 +17,8 @@ import {
   updateZipField,
   updateFirstNameField,
   updateLastNameField,
-  submit
+  submit,
+  updatePhoneField
 } from '../../reducers/signup'
 
 
@@ -68,6 +69,11 @@ class SignUp extends React.Component {
     this.props.updateStateField(event.target.value)
   };
 
+  handlePhone = (event) => {
+    console.log(event.target.value);
+    this.props.updatePhoneField(event.target.value)
+  };
+
   handleSubmit = (event) => {
     this.props.submit({
       fName: this.props.firstName,
@@ -77,6 +83,7 @@ class SignUp extends React.Component {
       address: this.props.address + ' ' + this.props.address2,
       zipcode: this.props.zip,
       state: this.props.stateUS,
+      phone: this.props.phoneNum
     })
   };
 
@@ -98,7 +105,7 @@ class SignUp extends React.Component {
 
               <Form.Group as={Col} controlId="formGridLastName">
                 <Form.Label>Last Name</Form.Label>
-                <Form.Control placeholder="Last Name" value={this.props.firstName} onChange={this.handleLastName.bind(this)} />
+                <Form.Control placeholder="Last Name" value={this.props.lastName} onChange={this.handleLastName.bind(this)} />
               </Form.Group>
             </Form.Row>
             <Form.Row>
@@ -117,12 +124,18 @@ class SignUp extends React.Component {
             <Form.Label>Address</Form.Label>
             <Form.Control placeholder="1234 Main St" value={this.props.address} onChange={this.handleAddress.bind(this)} />
           </Form.Group>
-
-          <Form.Group controlId="formGridAddress2">
+          <Form.Row>
+            <Form.Group controlId="formGridAddress2">
             <Form.Label>Address 2</Form.Label>
             <Form.Control placeholder="Apartment, studio, or floor" value={this.props.address2} onChange={this.handleAddress2.bind(this)} />
-          </Form.Group>
+            </Form.Group>
 
+            <Form.Group controlId="formGridPhoneNum">
+            <Form.Label>Address 2</Form.Label>
+            <Form.Control placeholder="+1 (111) 111 - 111" value={this.props.phoneNum} onChange={this.handlePhone.bind(this)} />
+            </Form.Group>
+
+          </Form.Row>
           <Form.Row>
             <Form.Group as={Col} controlId="formGridCity">
               <Form.Label>City</Form.Label>
@@ -249,6 +262,7 @@ const mapDispatchToProps = dispatch =>
       updateEmailField,
       updateFirstNameField,
       updateLastNameField,
+      updatePhoneField,
       submit,
       pushHome: () => push('/'),
     },
