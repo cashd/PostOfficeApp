@@ -146,11 +146,12 @@ export const updateLastNameField = (name) => {
   }
 };
 
-export const submit = () => {
+export const submit = (customer) => {
   return dispatch => {
     dispatch({ type: SIGNUP_REQUEST })
-    apiPost('/signup/customer', {})
+    apiPost('/signup/customer', customer)
       .then(respJSON => {
+        console.log(respJSON)
         if (respJSON.success) {
           dispatch({ type: SIGNUP_SUCCESS })
           dispatch(push('/'))
