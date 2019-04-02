@@ -10,6 +10,7 @@ export const UPDATE_ZIP_FIELD = 'signup/UPDATE_ZIP_FIELD';
 export const UPDATE_CITY_FIELD = 'signup/UPDATE_CITY_FIELD';
 export const UPDATE_FIRST_NAME_FIELD = 'signup/UPDATE_FIRST_NAME_FIELD';
 export const UPDATE_LAST_NAME_FIELD = 'signup/UPDATE_LAST_NAME_FIELD';
+export const UPDATE_PHONE_FIELD = 'signup/UPDATE_PHONE_FIELD';
 export const SIGNUP_REQUEST = 'signup/SIGNUP_REQUEST';
 export const SIGNUP_SUCCESS = 'signup/SIGNUP_SUCCESS';
 export const SIGNUP_FAILED = 'signup/SIGNUP_FAILED';
@@ -24,6 +25,7 @@ const initialState = {
   city: "",
   stateUS: "Choose...",
   zip: "",
+  phoneNum: "",
   error: { is: false, msg: "" },
 };
 
@@ -87,6 +89,11 @@ export default (state = initialState, action) => {
       return {
         ...state,
       };
+    case UPDATE_PHONE_FIELD:
+      return {
+        ...state,
+        phoneNum: action.payload.phoneNum
+      };
     default:
       return state
   }
@@ -143,6 +150,12 @@ export const updateFirstNameField = (name) => {
 export const updateLastNameField = (name) => {
   return dispatch => {
     dispatch({ type: UPDATE_LAST_NAME_FIELD, payload: { lastName: name } })
+  }
+};
+
+export const updatePhoneField = (phone) => {
+  return dispatch => {
+    dispatch({ type: UPDATE_PHONE_FIELD, payload: { phoneNum: phone } })
   }
 };
 
