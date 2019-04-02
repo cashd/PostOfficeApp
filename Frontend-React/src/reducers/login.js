@@ -1,4 +1,5 @@
 import { push } from 'connected-react-router'
+import { apiPost } from '../utils/api'
 
 export const UPDATE_PASSWORD_FIELD = 'login/UPDATE_PASSWORD_FIELD';
 export const UPDATE_EMAIL_FIELD = 'login/UPDATE_EMAIL_FIELD';
@@ -52,35 +53,21 @@ export const updateEmailField = (email) => {
   }
 };
 
-// TODO : CORS Credentials = Include
 export const checkLoginCredentials = (email, password) => {
   return dispatch => {
     dispatch({ type: REQUEST_LOGIN });
-
-    // Check email and password not null
-    // Check email regex
-    fetch('https://api.team9postoffice.ga/auth', {
-      method: 'post',
-      'credentials': 'include',
-      headers: {
-        'accept': 'application/json, text/plain, */*',
-        'content-type': 'application/json',
-      },
-      body: JSON.stringify({email: email, password: password})
-    }).then((resp) => {
-      if (resp.ok) {
-        return resp.json();
-      } else {
-        dispatch({ type: LOGIN_FAILED, payload: { error: { is: true, msg: "Server Error. Please try again later." } } })
-      }
-    }).then((respJSON) => {
-      console.log(respJSON)
-      if (respJSON.isAuth) {
+    apiPost('/auth', { email: email, password: password })
+      .then((respJSON) => {
+        console.log(respJSON)
+      if (respJSON["isAuth"]) {
         dispatch({ type: LOGIN_SUCCESS })
         dispatch(push('/'))
       } else {
-         dispatch({ type: LOGIN_FAILED, payload: { error: { is: true, msg: "Invalid Credentials." } } })
+         throw new Error('Invalid Credentials.')
       }
     })
+      .catch((error) => {
+        dispatch({ type: LOGIN_FAILED, payload: { error: { is: true, msg: error.message } } })
+        })
   }
 };
