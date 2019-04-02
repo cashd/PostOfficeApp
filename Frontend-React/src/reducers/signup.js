@@ -1,4 +1,5 @@
-// import { push } from 'connected-react-router'
+import { push } from 'connected-react-router'
+import { apiPost } from '../utils/api';
 
 export const UPDATE_PASSWORD_FIELD = 'signup/UPDATE_PASSWORD_FIELD';
 export const UPDATE_EMAIL_FIELD = 'signup/UPDATE_EMAIL_FIELD';
@@ -9,6 +10,9 @@ export const UPDATE_ZIP_FIELD = 'signup/UPDATE_ZIP_FIELD';
 export const UPDATE_CITY_FIELD = 'signup/UPDATE_CITY_FIELD';
 export const UPDATE_FIRST_NAME_FIELD = 'signup/UPDATE_FIRST_NAME_FIELD';
 export const UPDATE_LAST_NAME_FIELD = 'signup/UPDATE_LAST_NAME_FIELD';
+export const SIGNUP_REQUEST = 'signup/SIGNUP_REQUEST';
+export const SIGNUP_SUCCESS = 'signup/SIGNUP_SUCCESS';
+export const SIGNUP_FAILED = 'signup/SIGNUP_FAILED';
 
 const initialState = {
   firstName: "",
@@ -70,6 +74,19 @@ export default (state = initialState, action) => {
         ...state,
         lastName: action.payload.lastName,
       };
+    case SIGNUP_FAILED:
+      return {
+        ...state,
+        error: action.payload.error
+      };
+    case SIGNUP_SUCCESS:
+      return {
+        ...state,
+      };
+    case SIGNUP_REQUEST:
+      return {
+        ...state,
+      };
     default:
       return state
   }
@@ -130,5 +147,20 @@ export const updateLastNameField = (name) => {
 };
 
 export const submit = () => {
-
+  return dispatch => {
+    dispatch({ type: SIGNUP_REQUEST })
+    apiPost('/signup/customer', {})
+      .then(respJSON => {
+        if (respJSON.success) {
+          dispatch({ type: SIGNUP_SUCCESS })
+          dispatch(push('/'))
+        } else {
+          throw new Error('Could not signup!')
+        }
+      })
+      .catch(error => {
+        console.log(error)
+        dispatch({ type: SIGNUP_FAILED, payload: { is: true, msg: error.message } })
+      })
+  }
 };

@@ -27,7 +27,6 @@ export default (state = initialState, action) => {
 }
 
 export const getRoleCookie = () => {
-    console.log('here')
     return dispatch => {
         dispatch({ type: FETCH_ROLE_COOKIE })
         const roleCookie = Cookie.get('role')

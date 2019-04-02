@@ -11,7 +11,6 @@ class Home extends React.Component {
     this.props.getRoleCookie()
     }
 
-
     render() {
         const role = this.props.role;
         console.log(role)

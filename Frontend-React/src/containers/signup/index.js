@@ -1,9 +1,7 @@
 import React from 'react'
 import Form from 'react-bootstrap/Form'
-import Row from 'react-bootstrap/Row'
 import Col from 'react-bootstrap/Col'
 import Button from 'react-bootstrap/Button'
-import Alert from 'react-bootstrap/Alert'
 import { List }from 'immutable'
 import { push } from 'connected-react-router'
 import { bindActionCreators } from 'redux'
@@ -73,8 +71,6 @@ class SignUp extends React.Component {
   handleSubmit = (event) => {
     this.props.submit()
   };
-
-
 
   componentDidMount() {
     if (isAuth()) {
@@ -246,6 +242,7 @@ const mapDispatchToProps = dispatch =>
       updateFirstNameField,
       updateLastNameField,
       submit,
+      pushHome: () => push('/'),
     },
     dispatch
   );
