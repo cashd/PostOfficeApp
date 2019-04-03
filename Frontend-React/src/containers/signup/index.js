@@ -115,7 +115,7 @@ class SignUp extends React.Component {
             <Form.Row>
               <Form.Group as={Col} controlId="formGridEmail">
                 <Form.Label>Email</Form.Label>
-                <Form.Control type="email" placeholder="Enter email" value={this.props.email} onChange={this.handleEmail.bind(this)} />
+                <Form.Control type="email"  placeholder="Enter email" value={this.props.email} onChange={this.handleEmail.bind(this)} />
               </Form.Group>
 
               <Form.Group as={Col} controlId="formGridPassword">
@@ -160,7 +160,7 @@ class SignUp extends React.Component {
         </Form.Group>
       </Form.Row>
 
-      <Button variant="primary" type="submit" onClick={this.handleSubmit.bind(this)}>
+      <Button variant="primary" onClick={this.handleSubmit.bind(this)}>
         Submit
       </Button>
 </Form>;
