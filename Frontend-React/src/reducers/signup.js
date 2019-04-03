@@ -1,5 +1,6 @@
 import { push } from 'connected-react-router'
 import { apiPost } from '../utils/api';
+import Cookie from 'js-cookie'
 
 export const UPDATE_PASSWORD_FIELD = 'signup/UPDATE_PASSWORD_FIELD';
 export const UPDATE_EMAIL_FIELD = 'signup/UPDATE_EMAIL_FIELD';
@@ -168,7 +169,17 @@ export const submit = (customer) => {
         console.log(respJSON)
         if (respJSON.success) {
           dispatch({ type: SIGNUP_SUCCESS })
-          dispatch(push('/'))
+          apiPost('/auth', {email: customer.email, password: customer.password})
+          .then((respJSON) => {
+            console.log(respJSON)
+              if (respJSON["isAuth"]) {
+                Cookie.set('id', respJSON.id);
+                Cookie.set('role', respJSON.role);
+                dispatch(push('/'));
+              } else {
+                throw new Error('Invalid Credentials.')
+              }
+          })
         } else {
           throw new Error('Could not signup!')
         }

@@ -1,5 +1,6 @@
 import { push } from 'connected-react-router'
 import { apiPost } from '../utils/api'
+import Cookie from 'js-cookie'
 
 export const UPDATE_PASSWORD_FIELD = 'login/UPDATE_PASSWORD_FIELD';
 export const UPDATE_EMAIL_FIELD = 'login/UPDATE_EMAIL_FIELD';
@@ -61,7 +62,11 @@ export const checkLoginCredentials = (email, password) => {
         console.log(respJSON)
       if (respJSON["isAuth"]) {
         dispatch({ type: LOGIN_SUCCESS })
-        dispatch(push('/'))
+        Cookie.set('id', respJSON.id);
+        Cookie.set('role', respJSON.role);
+        console.log(Cookie.get('id'))
+        console.log(Cookie.get('role'))
+        dispatch(push('/'));
       } else {
          throw new Error('Invalid Credentials.')
       }

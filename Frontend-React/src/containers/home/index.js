@@ -15,7 +15,7 @@ class Home extends React.Component {
         const role = this.props.role;
         console.log(role)
         let home;
-        if (role === 'Customer') {
+        if (role === 'customer') {
             home =  <CustomerHome  />
         }
         else if (role === 'Facility') {
