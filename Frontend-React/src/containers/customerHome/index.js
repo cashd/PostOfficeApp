@@ -49,7 +49,7 @@ class CustomerHome extends React.Component {
         recipientEmail: this.props.newPackEmail,
         recipientAddress: this.props.newPackAddress,
         weight: this.props.newPackWeight,
-        dropoff: this.props.newPackDropOff,
+        dropoff: this.props.stateFacilities.get(this.props.newPackDropOff) ? this.props.stateFacilities.get(this.props.newPackDropOff) : this.props.stateFacilities.first(),
         senderId: id
     })
     }

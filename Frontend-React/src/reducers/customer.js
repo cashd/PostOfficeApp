@@ -73,7 +73,6 @@ export default (state = initialState, action) => {
 
 export const getPackages = (id) => {
   return dispatch =>{
-    console.log('asdfasdfasdf')
     dispatch({ type: PACKAGES_REQUEST })
     apiPost('/customer/packages', { id: id })
       .then((respJSON) => {
@@ -89,10 +88,12 @@ export const changeNewPackageView = (status) => {
 };
 
 export const newPackage = (info) => {
+  console.log(info);
   return dispatch => {
     apiPost('/customer/newPackage', info)
       .then((respJSON) => {
         if (respJSON.success) {
+          console.log(respJSON)
           dispatch({ type: NEW_PACKAGE_SUCCESS })
           window.location.reload()
         } else {
@@ -135,7 +136,7 @@ const transformFacilitiesToMap = (fac) => {
   fac.forEach((f) => {
     obj[f.address] = f.id;
   });
-  console.log(obj);
+  console.log(Map(obj));
   return Map(obj);
 };
 
