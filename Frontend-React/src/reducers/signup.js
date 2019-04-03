@@ -162,15 +162,17 @@ export const updatePhoneField = (phone) => {
 
 export const submit = (customer) => {
   return dispatch => {
-    console.log(customer);
+    //console.log(customer);
     dispatch({ type: SIGNUP_REQUEST })
     apiPost('/signup/customer', customer)
       .then(respJSON => {
+        console.log('herrrereere')
         console.log(respJSON)
         if (respJSON.success) {
           dispatch({ type: SIGNUP_SUCCESS })
           apiPost('/auth', {email: customer.email, password: customer.password})
           .then((respJSON) => {
+            console.log('heerererer')
             console.log(respJSON)
               if (respJSON["isAuth"]) {
                 Cookie.set('id', respJSON.id);
