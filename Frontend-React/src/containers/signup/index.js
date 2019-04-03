@@ -21,6 +21,7 @@ import {
   submit,
   updatePhoneField
 } from '../../reducers/signup'
+import Alert from "react-bootstrap/Alert";
 
 
 class SignUp extends React.Component {
@@ -97,6 +98,7 @@ class SignUp extends React.Component {
 
     render() {
         return <div style={divStyle}>
+          { this.props.error.is ? (<Alert variant="danger" > <Alert.Heading>Login Error!</Alert.Heading><p>{ this.props.error.msg }</p></Alert>): null }
         <h1 style={h1Style}> Sign up here! </h1>
         <Form style={formStyle}>
             <Form.Row>
