@@ -1,77 +1,55 @@
 import React from 'react'
-import Table from 'react-bootstrap/Table'
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
-import Cookie from 'js-cookie'
-import Button from 'react-bootstrap/Button'
-import Modal from 'react-bootstrap/Modal'
-import Form from 'react-bootstrap/Form'
-import Col from 'react-bootstrap/Col'
-
-
+import { getRoleCookie } from '../../reducers/employeeHome';
 
 
 class EmployeeHome extends React.Component {
   constructor(props) {
     super(props);
-    this.makeTR = this.makeTR.bind(this);
-  }
-
-  componentDidMount() {
-    const id = Cookie.get('id');
-  }
-
-  makeTR = (p, id) => {
-    return (
-      <React.Fragment key={id}>
-        <tr>
-          <td> { p.id } </td>
-          <td> { p.senderEmail } </td>
-          <td> { p.recipientEmail } </td>
-          <td> { p.senderAddress } </td>
-          <td> { p.recipientAddress } </td>
-          <td> { p.deliveryStatus } </td>
-          <td> { p.packageWeight } </td>
-        </tr>
-      </React.Fragment>)
-  };
-
+    this.props.getRoleCookie()
+    }
 
   render() {
-    return <div >
+    let empType;
+    if (this.props.truckID) {
+      empType = <h1>Employee-Driver Home</h1>
+    }
+    else if (this.props.facilityID && this.props.isManager === true) {
+      empType = <h1>Employee-Facility & Manager</h1>
+    }
+    else if (this.props.facilityID && !this.props.isManager || this.props.isManager === false) {
+      empType = <h1>Employee-Facility</h1>
+    }
+    else {
+      empType = <h1>You are not assigned to a facility or truck.</h1>
+    }
 
-</div>
+    return (
+      <div>
+        { empType }
+      </div>
+    )
     }
 }
 
+const mapStateToProps = ({ employeeHome }) => ({
+  role: employeeHome.role,
+  truckID: employeeHome.truckID,
+  facilityID: employeeHome.facilityID,
+  id: employeeHome.id,
+  isManager: employeeHome.isManager,
+});
 
-export default
+const mapDispatchToProps = dispatch =>
+  bindActionCreators(
+    {
+      getRoleCookie,
+    },
+    dispatch
+  );
 
-// const mapStateToProps = ({ customer }) => ({
-//   packages: customer.packages,
-//   newPackageViewStatus: customer.newPackageViewStatus,
-//   newPackAddress: customer.newPackAddress,
-//   newPackDropOff: customer.newPackDropOff,
-//   newPackEmail: customer.newPackEmail,
-//   newPackWeight: customer.newPackWeight,
-//   inPackages: customer.inPackages,
-// });
-//
-// const mapDispatchToProps = dispatch =>
-//   bindActionCreators(
-//     {
-//       getPackages,
-//       changeNewPackageView,
-//       newPackage,
-//       updateNewPackageAddress,
-//       updateNewPackageEmail,
-//       updateNewPackageWeight,
-//       getIncomingPackages,
-//     },
-//     dispatch
-//   );
-//
-// export default connect(
-//   mapStateToProps,
-//   mapDispatchToProps
-// )(CustomerHome)
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(EmployeeHome)

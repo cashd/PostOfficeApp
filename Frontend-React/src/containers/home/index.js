@@ -4,6 +4,7 @@ import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
 import { getRoleCookie } from '../../reducers/home'
 import CustomerHome from '../customerHome'
+import EmployeeHome from '../employeeHome'
 
 class Home extends React.Component {
     constructor(props) {
@@ -18,12 +19,10 @@ class Home extends React.Component {
         if (role === 'customer') {
             home =  <CustomerHome  />
         }
-        else if (role === 'Facility') {
-            home =  <p>Facility Home</p>
+        else if (role === 'employee') {
+            home =  <EmployeeHome />
         }
-        else if (role === 'Truck') {
-            home =  <p>Truck Home</p>
-        } else {
+        else {
             this.props.pushLogin()
         }
         return <div>

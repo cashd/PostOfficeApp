@@ -1,25 +1,28 @@
 import { push } from 'connected-react-router'
 import Cookie from 'js-cookie'
 
-export const FETCH_ROLE_COOKIE = 'employeeHome/FETCH_ROLE_COOKIE';
-export const SET_ROLE_COOKIE = 'employee/SET_ROLE_COOKIE';
-export const FAIL_ROLE_COOKIE = 'employee/FAIL_ROLE_COOKIE';
+export const GET_COOKIES = 'employeeHome/GET_COOKIES';
+export const FAIL_COOKIE = 'employee/ERROR';
 
 const initialState = {
-  role: "",
-  errorMsg: "",
+  id: null,
+  role: null,
+  isManager: null,
+  truckID: null,
+  facilityID: null,
 };
 
 export default (state = initialState, action) => {
   switch (action.type) {
-    case FETCH_ROLE_COOKIE:
-      return state;
-    case SET_ROLE_COOKIE:
+    case GET_COOKIES:
       return {
-        ...state,
-        role: action.payload.role
+        id: action.payload.id,
+        role: action.payload.role,
+        isManager: action.payload.isManager ? action.payload.isManager : null,
+        truckID: action.payload.truckID ? action.payload.truckID : null,
+        facilityID: action.payload.facilityID ? action.payload.facilityID : null,
       };
-    case FAIL_ROLE_COOKIE:
+    case FAIL_COOKIE:
       return state;
     default:
       return state
@@ -28,13 +31,19 @@ export default (state = initialState, action) => {
 
 export const getRoleCookie = () => {
     return dispatch => {
-        dispatch({ type: FETCH_ROLE_COOKIE });
-        const roleCookie = Cookie.get('role');
-        if (roleCookie) {
-            dispatch({ type: SET_ROLE_COOKIE, payload: { role: roleCookie } });
+        const role = Cookie.get('role');
+        const id = Cookie.get('id');
+        if (id && role) {
+          const cookies = {
+            isManager: Cookie.get('isManager'),
+            truckID: Cookie.get('truckID'),
+            facilityID: Cookie.get('facilityID'),
+            id: id,
+            role: role
+          };
+          dispatch({ type: GET_COOKIES, payload: cookies })
         } else {
-            dispatch({ type: FAIL_ROLE_COOKIE });
-            dispatch(push('/login'));
+          dispatch(push('/login'))
         }
     }
 };

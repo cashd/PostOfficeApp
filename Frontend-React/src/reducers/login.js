@@ -59,13 +59,19 @@ export const checkLoginCredentials = (email, password) => {
     dispatch({ type: REQUEST_LOGIN });
     apiPost('/auth', { email: email, password: password })
       .then((respJSON) => {
-        console.log(respJSON)
       if (respJSON["isAuth"]) {
         dispatch({ type: LOGIN_SUCCESS })
         Cookie.set('id', respJSON.id);
         Cookie.set('role', respJSON.role);
-        console.log(Cookie.get('id'))
-        console.log(Cookie.get('role'))
+        if (respJSON.truckID) {
+          Cookie.set('truckID', respJSON.truckID);
+        }
+        if(respJSON.facilityID) {
+          Cookie.set('facilityID', respJSON.facilityID);
+        }
+        if(respJSON.isManager === true) {
+          Cookie.set('isManager', respJSON.isManager);
+        }
         dispatch(push('/'));
       } else {
          throw new Error('Invalid Credentials.')
