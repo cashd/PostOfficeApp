@@ -10,8 +10,8 @@ export const getJSONroute = (route) => {
       return 'api/routes/custPackages.json';
     case '/customer/newPackage':
       return 'api/routes/newPackage.json';
-    case '/facility/state':
-      return 'api/routes/stateFacilities.json';
+    case '/customer/incomingPackages':
+      return 'api/routes/incomingPackages.json';
     default:
       return '';
   }

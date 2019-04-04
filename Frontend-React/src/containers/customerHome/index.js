@@ -12,10 +12,9 @@ import {
   changeNewPackageView,
   newPackage,
   updateNewPackageAddress,
-  updateNewPackageDropOff,
   updateNewPackageEmail,
   updateNewPackageWeight,
-  getStateFacilities
+  getIncomingPackages,
 } from '../../reducers/customer'
 
 
@@ -28,14 +27,13 @@ class CustomerHome extends React.Component {
     this.newPackageSubmit = this.newPackageSubmit.bind(this);
     this.handleNewPackageEmail = this.handleNewPackageEmail.bind(this);
     this.handleNewPackageAddress = this.handleNewPackageAddress.bind(this);
-    this.handleNewPackageDropOff = this.handleNewPackageDropOff.bind(this);
     this.handleNewPackageWeight = this.handleNewPackageWeight.bind(this);
   }
 
   componentDidMount() {
     const id = Cookie.get('id');
     this.props.getPackages(id);
-    this.props.getStateFacilities(id);
+    this.props.getIncomingPackages(id);
   }
 
   openNewPackage = () => {
@@ -49,7 +47,6 @@ class CustomerHome extends React.Component {
         recipientEmail: this.props.newPackEmail,
         recipientAddress: this.props.newPackAddress,
         weight: this.props.newPackWeight,
-        dropoff: this.props.stateFacilities.get(this.props.newPackDropOff) ? this.props.stateFacilities.get(this.props.newPackDropOff) : this.props.stateFacilities.first(),
         senderId: id
     })
     }
@@ -82,15 +79,8 @@ class CustomerHome extends React.Component {
     this.props.updateNewPackageWeight(event.target.value)
   };
 
-  handleNewPackageDropOff = (event) => {
-    this.props.updateNewPackageDropOff(event.target.value)
-  };
-
   render() {
-    return <div style={divStyle}>
-      <div style={{ marginTop: '3%' }}>
-        <Button variant='success' onClick={this.openNewPackage}>Ship a new package</Button>
-      </div>
+    return <div >
       <Modal show={this.props.newPackageViewStatus} onHide={this.openNewPackage}>
         <Modal.Header closeButton>
           <Modal.Title>Ship a New Package</Modal.Title>
@@ -109,14 +99,8 @@ class CustomerHome extends React.Component {
             </Form.Row>
             <Form.Row>
               <Form.Group as={Col} controlId='formGridWeight'>
-                <Form.Label> Recipient Email </Form.Label>
+                <Form.Label> Package Weight </Form.Label>
                 <Form.Control placeholder='1.0' value={this.props.newPackWeight} onChange={this.handleNewPackageWeight} />
-              </Form.Group>
-              <Form.Group as={Col} controlId='formGridDropOff'>
-                <Form.Label> Drop Off Location </Form.Label>
-                <Form.Control as='select' placeholder='123 Main St.' value={this.props.newPackDropOff} onChange={this.handleNewPackageDropOff} >
-                  { this.props.stateFacilities.keySeq().map((fac) => { return (<option key={fac}> { fac } </option>) }) }
-                </Form.Control>
               </Form.Group>
             </Form.Row>
           </Form>
@@ -130,9 +114,10 @@ class CustomerHome extends React.Component {
           </Button>
         </Modal.Footer>
       </Modal>
-
-
-      <h1> Your packages:  </h1>
+      <div style={{ marginTop: '3%' }}>
+        <h1>Your Packages:</h1>
+        <Button variant='success' onClick={this.openNewPackage}>Ship a new package</Button>
+      </div>
     <Table style={tableStyle} striped bordered hover>
     <thead>
       <tr>
@@ -149,18 +134,36 @@ class CustomerHome extends React.Component {
     { this.props.packages.map((pack) => { return this.makeTR(pack, pack.id) }) }
     </tbody>
     </Table>
+
+    <div style={{ marginTop: '3%' }}>
+      <h1>Packages en-route to you</h1>
+    </div>
+      <Table style={tableStyle} striped bordered hover>
+    <thead>
+      <tr>
+        <th>#</th>
+        <th>Sender Email</th>
+        <th>Recipient Email</th>
+        <th>Sender Address</th>
+        <th>Recipient Address</th>
+        <th>Status Address</th>
+        <th>Weight</th>
+      </tr>
+    </thead>
+    <tbody>
+    { this.props.inPackages.map((pack) => { return this.makeTR(pack, pack.id) }) }
+    </tbody>
+    </Table>
 </div>
     }
 }
 
 const tableStyle = {
-    margin: '0 auto',
-    marginTop: '3%',
+  margin: '0 auto',
+  marginTop: '3%',
+  textAlign: "center",
 };
 
-const divStyle = {
-    textAlign: "center",
-};
 
 const mapStateToProps = ({ customer }) => ({
   packages: customer.packages,
@@ -169,7 +172,7 @@ const mapStateToProps = ({ customer }) => ({
   newPackDropOff: customer.newPackDropOff,
   newPackEmail: customer.newPackEmail,
   newPackWeight: customer.newPackWeight,
-  stateFacilities: customer.stateFacilities,
+  inPackages: customer.inPackages,
 });
 
 const mapDispatchToProps = dispatch =>
@@ -179,10 +182,9 @@ const mapDispatchToProps = dispatch =>
       changeNewPackageView,
       newPackage,
       updateNewPackageAddress,
-      updateNewPackageDropOff,
       updateNewPackageEmail,
       updateNewPackageWeight,
-      getStateFacilities
+      getIncomingPackages,
     },
     dispatch
   );
