@@ -41,7 +41,7 @@ class CustomerHome extends React.Component {
   };
 
   newPackageSubmit = () => {
-    if (this.props.newPackEmail && this.props.newPackAddress && this.props.newPackWeight && this.props.newPackDropOff ) {
+    if (this.props.newPackEmail && this.props.newPackAddress && this.props.newPackWeight) {
       const id = Cookie.get('id');
       this.props.newPackage({
         recipientEmail: this.props.newPackEmail,
