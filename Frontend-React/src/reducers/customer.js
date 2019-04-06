@@ -119,7 +119,7 @@ export const updateNewPackageWeight= (weight) => {
 
 export const getIncomingPackages = (id) => {
   return dispatch => {
-    apiPost('/customer/incomingPackages', { id: id })
+    apiPost('/customer/incomingpackages', { id: id })
       .then((resp) => {
         dispatch({ type: GET_INCOMING_PACKAGES, payload: { packages: List(resp.packages) } })
       })

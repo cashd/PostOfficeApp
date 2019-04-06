@@ -1,4 +1,4 @@
-export const isDevelopment = true;
+export const isDevelopment = false;
 
 export const getJSONroute = (route) => {
   switch (route) {
@@ -10,7 +10,7 @@ export const getJSONroute = (route) => {
       return 'api/routes/custPackages.json';
     case '/customer/newPackage':
       return 'api/routes/newPackage.json';
-    case '/customer/incomingPackages':
+    case '/customer/incomingpackages':
       return 'api/routes/incomingPackages.json';
     default:
       return '';
