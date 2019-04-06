@@ -1,0 +1,31 @@
+{
+  "employees": [
+    {
+      "id": 1,
+      "firstName": "Sally",
+      "lastName": "Soe",
+      "position": "Something",
+      "workPhoneNum": "123123123",
+      "workEmail": "sally@usps.gov",
+      "salary": 60000
+    },
+    {
+      "id": 2,
+      "firstName": "Curious",
+      "lastName": "George",
+      "position": "Monkey",
+      "workPhoneNum": "123123123",
+      "workEmail": "monkey@usps.gov",
+      "salary": 10
+    },
+    {
+      "id": 3,
+      "firstName": "Geykume",
+      "lastName": "Smith",
+      "position": "Clerk",
+      "workPhoneNum": "123123123",
+      "workEmail": "geykume@usps.gov",
+      "salary": 1000000
+    }
+  ]
+}

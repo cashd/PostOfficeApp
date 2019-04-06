@@ -11,12 +11,8 @@ export const getRole = () => {
 };
 
 export const isManager = () => {
-  if (isManager) {
-    if (isManager === true){
-      return true
-    }
-  }
-  return false
+  // const isManager = Cookie.get('isManager') ? Cookie.get('isManager') : false;
+  return Cookie.get('isManager') ? Cookie.get('isManager') : false;
 };
 
 export const existFacility = () => {
