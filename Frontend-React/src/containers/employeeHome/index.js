@@ -2,6 +2,7 @@ import React from 'react'
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
 import { getRoleCookie } from '../../reducers/employeeHome';
+import EmpFacility from '../empFacility';
 
 
 class EmployeeHome extends React.Component {
@@ -19,7 +20,10 @@ class EmployeeHome extends React.Component {
       empType = <h1>Employee-Facility & Manager</h1>
     }
     else if (this.props.facilityID && !this.props.isManager || this.props.isManager === false) {
-      empType = <h1>Employee-Facility</h1>
+      empType = <EmpFacility info={{
+        isManager: this.props.isManager,
+        id: this.props.id,
+        facilityID: this.props.facilityID }} />
     }
     else {
       empType = <h1>You are not assigned to a facility or truck.</h1>

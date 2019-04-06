@@ -17,8 +17,6 @@ import {
   getIncomingPackages,
 } from '../../reducers/customer'
 
-
-
 class CustomerHome extends React.Component {
   constructor(props) {
     super(props);

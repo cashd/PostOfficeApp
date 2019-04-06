@@ -4,6 +4,7 @@ import home from './home'
 import signup from './signup'
 import customer from './customer'
 import employeeHome from './employeeHome'
+import empFacility from './empFacility'
 
 
 export default combineReducers({
@@ -11,5 +12,6 @@ export default combineReducers({
   home,
   signup,
   customer,
-  employeeHome
+  employeeHome,
+  empFacility
 })
