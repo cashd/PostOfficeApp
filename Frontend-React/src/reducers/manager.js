@@ -1,11 +1,14 @@
-// import { push } from 'connected-react-router'
+import { List } from 'immutable'
 
-export const SET_EMPLOYEE_INFO = 'empFacility/SET_EMPLOYEE_INFO';
+export const SET_EMPLOYEE_INFO = 'manager/SET_EMPLOYEE_INFO';
+export const GET_EMPLOYEES = 'manager/GET_EMPLOYEES';
 
 const initialState = {
   id: null,
   isManager: null,
   facilityID: null,
+  employees: List([]),
+  newEmp: {}
 };
 
 export default (state = initialState, action) => {

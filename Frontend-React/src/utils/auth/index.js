@@ -1,16 +1,4 @@
 import Cookie from 'js-cookie'
-import { isDevelopment } from '../api/apiConfig';
-
-const prodDomain = '.team9postoffice.ga';
-const testDomain = '.127.0.0.1:3000';
-
-export const getDomain = () => {
-  if (isDevelopment) {
-    return testDomain
-  } else {
-    return prodDomain
-  }
-};
 
 export const isAuth = () => {
   const credId = Cookie.get('id');
@@ -29,4 +17,8 @@ export const isManager = () => {
     }
   }
   return false
+};
+
+export const existFacility = () => {
+  return Cookie.get('facilityID') ? Cookie.get('facilityID') : false
 };

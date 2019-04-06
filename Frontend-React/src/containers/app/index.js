@@ -5,6 +5,7 @@ import About from '../about'
 import Login from '../login'
 import Navigation from '../navbar'
 import signup from '../signup'
+import Manager from '../manager'
 
 const App = () => (
   <div>
@@ -16,7 +17,8 @@ const App = () => (
       <Route exact path="/" component={Home} />
       <Route exact path="/about-us" component={About} />
       <Route exact path="/login" component={Login} />
-      <Route exact path="/signup" component={signup}/>
+      <Route exact path="/signup" component={signup} />
+      <Route exact path='/manager' component={Manager} />
     </main>
   </div>
 );

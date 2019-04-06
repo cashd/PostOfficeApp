@@ -4,7 +4,7 @@ import Navbar from 'react-bootstrap/Navbar'
 import Form from 'react-bootstrap/Form'
 // import FormControl from 'react-bootstrap/FormControl'
 import Button from 'react-bootstrap/Button'
-import { isAuth, isManager } from '../../utils/auth';
+import { isAuth, isManager, existFacility } from '../../utils/auth';
 import Cookie from 'js-cookie'
 
 class Navigation extends React.Component {
@@ -34,7 +34,7 @@ class Navigation extends React.Component {
                 <Navbar.Brand href="/">T9 ~ Post Office</Navbar.Brand>
                 <Nav className="mr-auto">
                   <Nav.Link href="/">Home</Nav.Link>
-                  { isManager ? <Nav.Link href="/manager">Manage Facility</Nav.Link> : null }
+                  { isManager() && existFacility() ? <Nav.Link href="/manager">Manage Facility</Nav.Link> : null }
                 </Nav>
                 <Form inline>
                   { isAuth() ? <Button onClick={this.logout} variant="outline-light">Logout</Button> : <Button href='/login' variant="outline-light">Login</Button> }
