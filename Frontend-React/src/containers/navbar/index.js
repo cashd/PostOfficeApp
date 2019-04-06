@@ -2,10 +2,26 @@ import React from 'react'
 import Nav from 'react-bootstrap/Nav'
 import Navbar from 'react-bootstrap/Navbar'
 import Form from 'react-bootstrap/Form'
-import FormControl from 'react-bootstrap/FormControl'
+// import FormControl from 'react-bootstrap/FormControl'
 import Button from 'react-bootstrap/Button'
+import { isAuth, isManager } from '../../utils/auth';
+import Cookie from 'js-cookie'
 
 class Navigation extends React.Component {
+  constructor(props) {
+    super(props);
+    this.logout = this.logout.bind(this);
+  }
+
+  logout = () => {
+    Cookie.remove('id');
+    Cookie.remove('role');
+    Cookie.remove('facilityID');
+    Cookie.remove('driverID');
+    Cookie.remove('isManager');
+    window.location.reload()
+  };
+
     render() {
         return <div>
             <link
@@ -15,13 +31,13 @@ class Navigation extends React.Component {
                 crossOrigin="anonymous"
             />
             <Navbar bg="primary" variant="dark">
-                <Navbar.Brand href="/">Navbar</Navbar.Brand>
+                <Navbar.Brand href="/">T9 ~ Post Office</Navbar.Brand>
                 <Nav className="mr-auto">
                   <Nav.Link href="/">Home</Nav.Link>
+                  { isManager ? <Nav.Link href="/manager">Manage Facility</Nav.Link> : null }
                 </Nav>
                 <Form inline>
-                  <FormControl type="text" placeholder="Search" className="mr-sm-2" />
-                  <Button variant="outline-light">Search</Button>
+                  { isAuth() ? <Button onClick={this.logout} variant="outline-light">Logout</Button> : <Button href='/login' variant="outline-light">Login</Button> }
                 </Form>
             </Navbar>
   </div>

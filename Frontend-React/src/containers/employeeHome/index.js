@@ -3,6 +3,7 @@ import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
 import { getRoleCookie } from '../../reducers/employeeHome';
 import EmpFacility from '../empFacility';
+import { isManager } from "../../utils/auth";
 
 
 class EmployeeHome extends React.Component {
@@ -16,10 +17,10 @@ class EmployeeHome extends React.Component {
     if (this.props.truckID) {
       empType = <h1>Employee-Driver Home</h1>
     }
-    else if (this.props.facilityID && this.props.isManager === true) {
+    else if (this.props.facilityID && isManager()) {
       empType = <h1>Employee-Facility & Manager</h1>
     }
-    else if (this.props.facilityID && !this.props.isManager || this.props.isManager === false) {
+    else if (this.props.facilityID && !isManager() ) {
       empType = <EmpFacility info={{
         isManager: this.props.isManager,
         id: this.props.id,
