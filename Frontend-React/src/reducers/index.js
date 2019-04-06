@@ -5,7 +5,6 @@ import signup from './signup'
 import customer from './customer'
 import employeeHome from './employeeHome'
 import empFacility from './empFacility'
-import manager from './manager'
 
 
 export default combineReducers({
@@ -15,5 +14,4 @@ export default combineReducers({
   customer,
   employeeHome,
   empFacility,
-  manager
 })
