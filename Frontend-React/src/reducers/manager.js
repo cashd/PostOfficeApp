@@ -50,6 +50,9 @@ export const getEmployees = (payload) => {
     apiPost('/facility/employees', payload)
       .then((resp) => {
         console.log(resp)
+        if (resp.message) {
+          updateError(resp.message)
+        }
         dispatch({ type: GET_EMPLOYEES, payload: { employees: resp.employees } })
       })
       .catch((error) => {
