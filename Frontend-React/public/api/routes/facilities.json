@@ -1,0 +1,25 @@
+{
+  "facilities": [
+    {
+      "facilityID":1,
+      "address": "333 Wick St.",
+      "city": "Austin",
+      "state": "Texas",
+      "zip": 77023
+    },
+    {
+      "facilityID":2,
+      "address": "444 Andrea St.",
+      "city": "Houston",
+      "state": "Texas",
+      "zip": 77024
+    },
+    {
+      "facilityID":3,
+      "address": "555 Lucky St.",
+      "city": "Phoenix",
+      "state": "Arizona",
+      "zip": 1223
+    }
+  ]
+}

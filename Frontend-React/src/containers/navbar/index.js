@@ -18,6 +18,7 @@ class Navigation extends React.Component {
     Cookie.remove('role');
     Cookie.remove('facilityID');
     Cookie.remove('driverID');
+    Cookie.remove('truckID');
     Cookie.remove('isManager');
     window.location.reload()
   };
