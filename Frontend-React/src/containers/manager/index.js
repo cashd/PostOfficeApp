@@ -17,7 +17,7 @@ class Manager extends React.Component {
     this.state = {
       id: Cookie.get('id'),
       isManager: isManager(),
-      facilityID: Cookie.get('id'),
+      facilityID: Cookie.get('facilityID'),
       employees: List([]),
       newEmp: {
         firstName: '',
