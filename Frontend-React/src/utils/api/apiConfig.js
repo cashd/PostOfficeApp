@@ -1,4 +1,4 @@
-export const isDevelopment = true;
+export const isDevelopment = false;
 
 export const getJSONroute = (route) => {
   switch (route) {
