@@ -71,7 +71,7 @@ class EmpFacility extends React.Component {
     apiPost('/facility/trucks', { facilityID: this.state.facilityID })
       .then(resp => {
         console.log(resp);
-        if (resp.trucks) {
+        if (resp.trucks && resp.trucks.length !== 0) {
           this.setState({ trucks: List(resp.trucks) })
         } else {
           this.setState({ notification: { is: true, message: 'There are currently no trucks at the facility!', type: 'warning', header: 'No trucks.' } })
