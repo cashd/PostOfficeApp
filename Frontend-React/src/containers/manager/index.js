@@ -11,7 +11,6 @@ import { List } from 'immutable'
 import { apiPost } from '../../utils/api'
 import Alert from 'react-bootstrap/Alert';
 
-
 class Manager extends React.Component {
   constructor(props) {
     super(props);
@@ -31,6 +30,7 @@ class Manager extends React.Component {
         zip: '',
         state: '',
         address: '',
+        city: ''
       },
       showNewEmp: false,
       showReport: false,
@@ -94,7 +94,7 @@ class Manager extends React.Component {
 
   handleNewEmpSubmit = () => {
     const emp = this.state.newEmp;
-    if (emp.workPhone && emp.workEmail && emp.password && emp.firstName && emp.lastName && emp.position && emp.salary && emp.zip && emp.address && emp.state) {
+    if (emp.phoneNum && emp.email && emp.password && emp.firstName && emp.lastName && emp.position && emp.salary && emp.zip && emp.address && emp.state) {
       apiPost('/manager/addEmployee', {
         managerID: this.state.id,
         facilityID: this.state.facilityID,
@@ -148,7 +148,7 @@ class Manager extends React.Component {
             <Form.Row>
               <Form.Group as={Col} controlId='formGridEmail'>
                 <Form.Label> Work Email </Form.Label>
-                <Form.Control placeholder='example@website.com' name='workEmail' value={this.state.newEmp.workEmail} onChange={this.handleNewEmpChange} />
+                <Form.Control placeholder='example@website.com' name='email' value={this.state.newEmp.email} onChange={this.handleNewEmpChange} />
               </Form.Group>
               <Form.Group as={Col} controlId='formGridPassword'>
                 <Form.Label> Password </Form.Label>
@@ -164,9 +164,9 @@ class Manager extends React.Component {
                 <Form.Label> Salary </Form.Label>
                 <Form.Control placeholder='60000' name='salary' value={this.state.newEmp.salary} onChange={this.handleNewEmpChange}  />
               </Form.Group>
-              <Form.Group as={Col} controlId='formGridworkPhone'>
+              <Form.Group as={Col} controlId='formGridPhone'>
                 <Form.Label> Work Phone </Form.Label>
-                <Form.Control placeholder='832-123-123' name='workPhone' value={this.state.newEmp.workPhone} onChange={this.handleNewEmpChange}  />
+                <Form.Control placeholder='832-123-123' name='phoneNum' value={this.state.newEmp.phoneNum} onChange={this.handleNewEmpChange}  />
               </Form.Group>
             </Form.Row>
             <Form.Row>
@@ -174,6 +174,12 @@ class Manager extends React.Component {
                 <Form.Label> Address </Form.Label>
                 <Form.Control placeholder='123 Main St.' name='address' value={this.state.newEmp.address} onChange={this.handleNewEmpChange}  />
               </Form.Group>
+              <Form.Group as={Col} controlId='formGridCity'>
+                <Form.Label> City </Form.Label>
+                <Form.Control placeholder='Houston' name='city' value={this.state.newEmp.city} onChange={this.handleNewEmpChange}  />
+              </Form.Group>
+            </Form.Row>
+            <Form.Row>
               <Form.Group as={Col} controlId='formGridZip'>
                 <Form.Label> Zip </Form.Label>
                 <Form.Control placeholder='77023' name='zip' value={this.state.newEmp.zip} onChange={this.handleNewEmpChange}  />
