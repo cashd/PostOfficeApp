@@ -30,7 +30,8 @@ class Manager extends React.Component {
         zip: '',
         state: '',
         address: '',
-        city: ''
+        city: '',
+        role: '',
       },
       showNewEmp: false,
       showReport: false,
@@ -94,7 +95,7 @@ class Manager extends React.Component {
 
   handleNewEmpSubmit = () => {
     const emp = this.state.newEmp;
-    if (emp.phoneNum && emp.email && emp.password && emp.firstName && emp.lastName && emp.position && emp.salary && emp.zip && emp.address && emp.state) {
+    if (emp.phoneNum && emp.email && emp.password && emp.firstName && emp.lastName && emp.position && emp.salary && emp.zip && emp.address && emp.state && emp.city && emp.role && emp.role !== 'Choose...') {
       apiPost('/manager/addEmployee', {
         managerID: this.state.id,
         facilityID: this.state.facilityID,
@@ -186,7 +187,16 @@ class Manager extends React.Component {
               </Form.Group>
               <Form.Group as={Col} controlId='formGridState'>
                 <Form.Label> State </Form.Label>
-                <Form.Control placeholder='Texas' name='state' value={this.state.newEmp.state} onChange={this.handleNewEmpChange}  />
+                <Form.Control name='role' value={this.state.newEmp.role} onChange={this.handleNewEmpChange}  />
+              </Form.Group>
+              <Form.Group as={Col} controlId="formGridRole">
+                <Form.Label>Role</Form.Label>
+                <Form.Control as="select">
+                  <option>Choose...</option>
+                  <option>Supervisor</option>
+                  <option>Driver</option>
+                  <option>Facility</option>
+                </Form.Control>
               </Form.Group>
             </Form.Row>
           </Modal.Body>
