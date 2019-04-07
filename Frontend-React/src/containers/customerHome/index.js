@@ -45,7 +45,7 @@ class CustomerHome extends React.Component {
         recipientEmail: this.props.newPackEmail,
         recipientAddress: this.props.newPackAddress,
         weight: this.props.newPackWeight,
-        senderId: id
+        senderID: id
     })
     }
   };
