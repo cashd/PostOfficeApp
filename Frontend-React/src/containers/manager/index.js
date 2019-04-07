@@ -23,11 +23,11 @@ class Manager extends React.Component {
       newEmp: {
         firstName: '',
         lastName: '',
-        workEmail: '',
+        email: '',
         password: '',
         position: '',
         salary: '',
-        workPhone: '',
+        phoneNum: '',
         zip: '',
         state: '',
         address: '',
