@@ -148,7 +148,7 @@ class SignUp extends React.Component {
 
         <Form.Group as={Col} controlId="formGridState">
           <Form.Label>State</Form.Label>
-          <Form.Control as="select" value={this.props.stateUS}onChange={this.handleState.bind(this)}>
+          <Form.Control as="select" value={this.props.stateUS} onChange={this.handleState.bind(this)}>
             <option>Choose...</option>
               { states.map((state) => {return (<option>{state}</option>)}) }
           </Form.Control>

@@ -31,7 +31,7 @@ class Manager extends React.Component {
         state: '',
         address: '',
         city: '',
-        role: '',
+        role: 'Choose...',
       },
       showNewEmp: false,
       showReport: false,
@@ -94,6 +94,7 @@ class Manager extends React.Component {
   };
 
   handleNewEmpSubmit = () => {
+    console.log(this.state.newEmp);
     const emp = this.state.newEmp;
     if (emp.phoneNum && emp.email && emp.password && emp.firstName && emp.lastName && emp.position && emp.salary && emp.zip && emp.address && emp.state && emp.city && emp.role && emp.role !== 'Choose...') {
       apiPost('/manager/addEmployee', {
@@ -187,11 +188,11 @@ class Manager extends React.Component {
               </Form.Group>
               <Form.Group as={Col} controlId='formGridState'>
                 <Form.Label> State </Form.Label>
-                <Form.Control name='role' value={this.state.newEmp.role} onChange={this.handleNewEmpChange}  />
+                <Form.Control name='state' value={this.state.newEmp.state} onChange={this.handleNewEmpChange}  />
               </Form.Group>
               <Form.Group as={Col} controlId="formGridRole">
                 <Form.Label>Role</Form.Label>
-                <Form.Control as="select">
+                <Form.Control as="select" name='role' value={this.state.newEmp.role} onChange={this.handleNewEmpChange}>
                   <option>Choose...</option>
                   <option>Supervisor</option>
                   <option>Driver</option>
@@ -247,5 +248,64 @@ const ControlButtonStyle = {
 const h3Style = {
   marginTop: '2.5%',
 };
+
+const states = List([
+    'Alabama',
+    'Alaska',
+    'Arizona',
+    'Arkansas',
+    'California',
+    'Colorado',
+    'Connecticut',
+    'Delaware',
+    'Florida',
+    'Georgia',
+    'Hawaii',
+    'Idaho',
+    'Illinois',
+    'Indiana',
+    'Iowa',
+    'Kansas',
+    'Kentucky',
+    'Louisiana',
+    'Maine',
+    'Maryland',
+    'Massachusetts',
+    'Michigan',
+    'Minnesota',
+    'Mississippi',
+    'Missouri',
+    'Montana',
+    'Nebraska',
+    'Nevada',
+    'New Hampshire',
+    'New Jersey',
+    'New Mexico',
+    'New York',
+    'North Carolina',
+    'North Dakota',
+    'Ohio',
+    'Oklahoma',
+    'Oregon',
+    'Pennsylvania',
+    'Rhode Island',
+    'South Carolina',
+    'South Dakota',
+    'Tennessee',
+    'Texas',
+    'Utah',
+    'Vermont',
+    'Virginia',
+    'Washington',
+    'West Virginia',
+    'Wisconsin',
+    'Wyoming',
+    'District of Columbia',
+    'Puerto Rico',
+    'Guam',
+    'American Samoa',
+    'U.S. Virgin Islands',
+    'Northern Mariana Islands',
+]);
 
 export default Manager;

@@ -16,6 +16,8 @@ export const getJSONroute = (route) => {
       return 'api/routes/empFacility.json';
     case '/facility/packages':
       return 'api/routes/facilityPackages.json';
+    case '/manager/addEmployee':
+      return 'api/routes/newPackage.json';
     default:
       return '';
   }
