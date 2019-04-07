@@ -1,0 +1,34 @@
+{
+  "trucks": [
+    {
+      "truckID": 1,
+      "driverFirstName": "Bob",
+      "driverLastName": "Smith",
+      "type": "Transfer"
+    },
+    {
+      "truckID": 2,
+      "driverFirstName": "George",
+      "driverLastName": "Ida",
+      "type": "Transfer"
+    },
+    {
+      "truckID": 3,
+      "driverFirstName": "Win",
+      "driverLastName": "Luy",
+      "type": "Delivery"
+    },
+    {
+      "truckID": 44,
+      "driverFirstName": "Kristian",
+      "driverLastName": "Immela",
+      "type": "Transfer"
+    },
+    {
+      "truckID": 143,
+      "driverFirstName": "Santa",
+      "driverLastName": "Clause",
+      "type": "Delivery"
+    }
+  ]
+}

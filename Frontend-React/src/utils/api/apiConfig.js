@@ -1,4 +1,4 @@
-export const isDevelopment = false;
+export const isDevelopment = true;
 
 export const getJSONroute = (route) => {
   switch (route) {
@@ -18,6 +18,8 @@ export const getJSONroute = (route) => {
       return 'api/routes/facilityPackages.json';
     case '/manager/addEmployee':
       return 'api/routes/newPackage.json';
+    case '/facility/trucks':
+      return 'api/routes/facilityTrucks.json';
     default:
       return '';
   }

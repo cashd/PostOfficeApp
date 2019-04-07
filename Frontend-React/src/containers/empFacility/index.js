@@ -20,17 +20,20 @@ class EmpFacility extends React.Component {
       packages: List([]),
       selectedPackages: List([]),
       trucks: List([]),
+      selectedTruck: 'Choose a Truck...',
       notification: { is: false, message: '', type: '', header: '' }
     };
 
     this.makeTR = this.makeTR.bind(this);
     this.getPackages = this.getPackages.bind(this);
+    this.getTrucks = this.getTrucks.bind(this);
     this.handleCheckbox = this.handleCheckbox.bind(this);
     this.handleMoveButton = this.handleMoveButton.bind(this);
   }
 
   componentDidMount() {
     this.getPackages()
+    this.getTrucks();
   }
 
 
@@ -64,11 +67,24 @@ class EmpFacility extends React.Component {
       })
   };
 
+  getTrucks = () => {
+    apiPost('/facility/trucks', { facilityID: this.state.facilityID })
+      .then(resp => {
+        console.log(resp);
+        if (resp.trucks) {
+          this.setState({ trucks: List(resp.trucks) })
+        } else {
+          this.setState({ notification: { is: true, message: 'There are currently no trucks at the facility!', type: 'warning', header: 'No trucks.' } })
+        }
+      })
+      .catch(error => {
+        this.setState({ notification: { is: true, message: 'Could not get trucks.', type: 'danger', header: 'Error!' } })
+      })
+  };
+
   handleCheckbox = (event) => {
     const checkbox = document.getElementById(event.target.id);
-    console.log(checkbox.checked);
     if (checkbox.checked) {
-      console.log('here');
       this.setState({ selectedPackages: this.state.selectedPackages.push(event.target.id) }, () => { checkbox.checked = true });
     } else {
       this.setState({ selectedPackages: this.state.selectedPackages.delete(this.state.selectedPackages.indexOf(event.target.id)) }, () => { checkbox.checked = false; } );
@@ -76,7 +92,11 @@ class EmpFacility extends React.Component {
   };
 
   handleMoveButton = (event) => {
-    console.log(this.state.selectedPackages)
+    console.log(this.state.selectedPackages);
+  };
+
+  handleTruckChange = (event) => {
+    this.setState({ selectedTruck: event.target.value });
   };
 
   render() {
@@ -88,7 +108,15 @@ class EmpFacility extends React.Component {
             <Card.Header>Control Center</Card.Header>
             <Card.Body>
               <Card.Title>Employee Actions</Card.Title>
-              <Button size='lg' variant="info" style={ControlButtonStyle} onClick={this.handleMoveButton}>Move Packages into Truck</Button>
+              <Form.Row style ={{ width: 500, margin: '0 auto', textAlign: 'center'  }}>
+                <Button variant="info" style={ControlButtonStyle} onClick={this.handleMoveButton}>Move Packages into Truck</Button>
+                <Form.Group as={Col}>
+                  <Form.Control as='select' value={this.state.selectedTruck} onChange={this.handleTruckChange}>
+                    <option>Choose a Truck</option>
+                    { this.state.trucks.map((truck) => {return (<option key={truck.truckID}>{truck.truckID + ' - ' + truck.driverFirstName + ' ' + truck.driverLastName + ' - ' + truck.type}</option>)}) }
+                  </Form.Control>
+              </Form.Group>
+              </Form.Row>
             </Card.Body>
           </Card>
         </div>
