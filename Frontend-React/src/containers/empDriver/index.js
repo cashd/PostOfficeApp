@@ -81,7 +81,7 @@ class EmpDriver extends React.Component {
         }
       })
       .catch(error => {
-        this.setState({ notification: { is: true, message: 'Could not get trucks.', type: 'danger', header: 'Error!' } })
+        this.setState({ notification: { is: true, message: 'Could not get facilities.', type: 'danger', header: 'Error!' } })
       })
   };
 
