@@ -20,7 +20,7 @@ class EmpFacility extends React.Component {
       packages: List([]),
       selectedPackages: List([]),
       trucks: List([]),
-      selectedTruck: 'Choose a Truck...',
+      selectedTruck: 'Choose a Truck',
       notification: { is: false, message: '', type: '', header: '' }
     };
 
@@ -93,6 +93,20 @@ class EmpFacility extends React.Component {
 
   handleMoveButton = (event) => {
     console.log(this.state.selectedPackages);
+    const state = this.state;
+    if (state.selectedTruck !== 'Choose a Truck' && state.selectedPackages.size !== 0)
+      apiPost('/facility/move', { packages: state.selectedPackages, facilityID: state.facilityID, truckID: Number(state.selectedTruck[0]) } )
+        .then(resp => {
+          console.log(resp);
+          if (resp.success) {
+            window.location.reload();
+          } else {
+            this.setState({ notification: { is: true, message: 'Could not load packages.', type: 'danger', header: 'Error!' } })
+          }
+        })
+        .catch(error => {
+          this.setState({ notification: { is: true, message: 'Could not load packages.', type: 'danger', header: 'Error!' } })
+        })
   };
 
   handleTruckChange = (event) => {

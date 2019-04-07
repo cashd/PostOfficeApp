@@ -59,7 +59,7 @@ class EmpDriver extends React.Component {
   getFacilities = () => {
     apiPost('/facility/all', { facilityID: this.state.facilityID })
       .then((resp) => {
-        if (resp.facilities && resp.facilities.length !== 0) {
+        if (resp.facilities && resp.facilities.size !== 0) {
           this.setState({ facilities: List(resp.facilities) })
         } else {
           this.setState({ notification: { is: true, message: 'Could not get facilities.', type: 'danger', header: 'Error!' } })

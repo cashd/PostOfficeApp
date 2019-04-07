@@ -30,6 +30,8 @@ export const getJSONroute = (route) => {
       return 'api/routes/truckTravel.json';
     case '/truck/deliver':
       return 'api/routes/truckDeliver.json';
+    case '/facility/move':
+      return 'api/routes/facilityMove.json';
     default:
       return '';
   }
