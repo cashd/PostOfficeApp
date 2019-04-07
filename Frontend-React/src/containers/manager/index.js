@@ -26,8 +26,11 @@ class Manager extends React.Component {
         workEmail: '',
         password: '',
         position: '',
-        salary: 0,
+        salary: '',
         workPhone: '',
+        zip: '',
+        state: '',
+        address: '',
       },
       showNewEmp: false,
       showReport: false,
@@ -91,7 +94,7 @@ class Manager extends React.Component {
 
   handleNewEmpSubmit = () => {
     const emp = this.state.newEmp;
-    if (emp.workPhone && emp.workEmail && emp.password && emp.firstName && emp.lastName && emp.position && emp.salary) {
+    if (emp.workPhone && emp.workEmail && emp.password && emp.firstName && emp.lastName && emp.position && emp.salary && emp.zip && emp.address && emp.state) {
       apiPost('/manager/addEmployee', {
         managerID: this.state.id,
         facilityID: this.state.facilityID,
@@ -164,6 +167,20 @@ class Manager extends React.Component {
               <Form.Group as={Col} controlId='formGridworkPhone'>
                 <Form.Label> Work Phone </Form.Label>
                 <Form.Control placeholder='832-123-123' name='workPhone' value={this.state.newEmp.workPhone} onChange={this.handleNewEmpChange}  />
+              </Form.Group>
+            </Form.Row>
+            <Form.Row>
+              <Form.Group as={Col} controlId='formGridAddress'>
+                <Form.Label> Address </Form.Label>
+                <Form.Control placeholder='123 Main St.' name='address' value={this.state.newEmp.address} onChange={this.handleNewEmpChange}  />
+              </Form.Group>
+              <Form.Group as={Col} controlId='formGridZip'>
+                <Form.Label> Zip </Form.Label>
+                <Form.Control placeholder='77023' name='zip' value={this.state.newEmp.zip} onChange={this.handleNewEmpChange}  />
+              </Form.Group>
+              <Form.Group as={Col} controlId='formGridState'>
+                <Form.Label> State </Form.Label>
+                <Form.Control placeholder='Texas' name='state' value={this.state.newEmp.state} onChange={this.handleNewEmpChange}  />
               </Form.Group>
             </Form.Row>
           </Modal.Body>
