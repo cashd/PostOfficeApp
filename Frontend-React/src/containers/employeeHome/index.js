@@ -18,7 +18,10 @@ class EmployeeHome extends React.Component {
       empType = <h1>Employee-Driver Home</h1>
     }
     else if (this.props.facilityID && isManager()) {
-      empType = <h1>Employee-Facility & Manager</h1>
+      empType = <EmpFacility info={{
+        isManager: this.props.isManager,
+        id: this.props.id,
+        facilityID: this.props.facilityID }} />
     }
     else if (this.props.facilityID && !isManager() ) {
       empType = <EmpFacility info={{

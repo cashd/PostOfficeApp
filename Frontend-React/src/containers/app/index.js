@@ -10,6 +10,10 @@ import Manager from '../manager'
 const App = () => (
   <div>
     <header>
+      <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500" />
+      <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons" />
+      <link rel="stylesheet" href="https://npmcdn.com/react-bootstrap-table/dist/react-bootstrap-table-all.min.css">
+</link>
       <Navigation/>
     </header>
 

@@ -1,0 +1,31 @@
+{
+  "packages": [
+    {
+      "id": "1",
+      "senderEmail": "bob@gmail.com",
+      "recipientEmail": "tom@yahoo.com",
+      "senderAddress": "123 Main St.",
+      "recipientAddress": "400 Market Ln.",
+      "deliveryStatus": "in-transit",
+      "packageWeight": "2.0oz"
+    },
+    {
+      "id": "2",
+      "senderEmail": "bob@gmail.com",
+      "recipientEmail": "lauren@yahoo.com",
+      "senderAddress": "123 Main St.",
+      "recipientAddress": "666 Devil Ln.",
+      "deliveryStatus": "in-transit",
+      "packageWeight": "2.0oz"
+    },
+    {
+      "id": "3",
+      "senderEmail": "bob@gmail.com",
+      "recipientEmail": "bradfyi@yahoo.com",
+      "senderAddress": "123 Main St.",
+      "recipientAddress": "345 Cullen Blvd.",
+      "deliveryStatus": "in-transit",
+      "packageWeight": "2.0oz"
+    }
+  ]
+}

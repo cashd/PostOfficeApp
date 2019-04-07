@@ -14,6 +14,8 @@ export const getJSONroute = (route) => {
       return 'api/routes/incomingPackages.json';
     case '/facility/employees':
       return 'api/routes/empFacility.json';
+    case '/facility/packages':
+      return 'api/routes/facilityPackages.json';
     default:
       return '';
   }

@@ -9,7 +9,7 @@ import Card from 'react-bootstrap/Card'
 import Table from 'react-bootstrap/Table'
 import { List } from 'immutable'
 import { apiPost } from '../../utils/api'
-import Alert from "react-bootstrap/Alert";
+import Alert from 'react-bootstrap/Alert';
 
 
 class Manager extends React.Component {
@@ -55,10 +55,10 @@ class Manager extends React.Component {
 
   componentDidMount() {
       this.getEmployees({
-        managerID: this.props.id,
-        facilityID: this.props.facilityID,
+        managerID: this.state.id,
+        facilityID: this.state.facilityID,
       });
-    }
+    };
 
   makeTR = (e, id) => {
       return (
