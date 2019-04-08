@@ -108,8 +108,9 @@ class EmpDriver extends React.Component {
   handleTravelButton = (event) => {
     console.log(this.state);
     const state = this.state;
+    const packageIds = state.packages.map((p) => p.id);
     if (state.selectedFacility !== 'Choose a Facility') {
-      apiPost('/truck/travel', { packages: state.packages, truckID: state.truckID, facilityID: Number(state.selectedFacility[0]) })
+      apiPost('/truck/travel', { packages: packageIds, truckID: state.truckID, facilityID: Number(state.selectedFacility[0]) })
       .then(resp => {
         console.log(resp);
         if (resp.success && resp.success === true) {
