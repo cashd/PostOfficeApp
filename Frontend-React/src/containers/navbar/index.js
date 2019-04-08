@@ -38,6 +38,7 @@ class Navigation extends React.Component {
                   { isManager() && existFacility() ? <Nav.Link href="/manager">Manage Facility</Nav.Link> : null }
                 </Nav>
                 <Form inline>
+                  { isAuth() ? null : <Button href='/signup' variant="outline-light" style={{ marginRight: 22 }}>Signup</Button> }
                   { isAuth() ? <Button onClick={this.logout} variant="outline-light">Logout</Button> : <Button href='/login' variant="outline-light">Login</Button> }
                 </Form>
             </Navbar>
