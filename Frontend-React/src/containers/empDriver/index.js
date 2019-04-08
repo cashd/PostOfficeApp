@@ -71,7 +71,7 @@ class EmpDriver extends React.Component {
   };
 
   getPackages = () => {
-    apiPost('/facility/packages', { truckID: this.state.truckID })
+    apiPost('/truck/packages', { truckID: this.state.truckID })
       .then(resp => {
         console.log(resp);
         if (resp.packages && resp.packages.length !== 0) {
