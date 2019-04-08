@@ -132,7 +132,7 @@ class EmpFacility extends React.Component {
 
   render() {
     return (
-      <div>
+      <div style={{backgroundColor: 'whitesmoke'}}>
         { this.state.notification.is ? (<Alert variant={this.state.notification.type} dismissible> <Alert.Heading>{ this.state.notification.header }</Alert.Heading><p>{ this.state.notification.message }</p></Alert>): null }
         <div>
           <Card className="text-center">

@@ -14,6 +14,7 @@ const App = () => (
       <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons" />
       <link rel="stylesheet" href="https://npmcdn.com/react-bootstrap-table/dist/react-bootstrap-table-all.min.css">
 </link>
+
       <Navigation/>
     </header>
 
