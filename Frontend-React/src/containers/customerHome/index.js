@@ -16,6 +16,7 @@ import {
   updateNewPackageWeight,
   getIncomingPackages,
 } from '../../reducers/customer'
+import Card from "react-bootstrap/Card";
 
 class CustomerHome extends React.Component {
   constructor(props) {
@@ -112,9 +113,17 @@ class CustomerHome extends React.Component {
           </Button>
         </Modal.Footer>
       </Modal>
+      <Card className="text-center">
+        <Card.Header>Control Center</Card.Header>
+        <Card.Body>
+          <Card.Title>Customer Actions</Card.Title>
+          <Button size='lg' variant='success' onClick={this.openNewPackage}>Ship a new package</Button>
+        </Card.Body>
+      </Card>
+
+
       <div style={{ marginTop: '3%' }}>
         <h1>Your Packages:</h1>
-        <Button variant='success' onClick={this.openNewPackage}>Ship a new package</Button>
       </div>
     <Table style={tableStyle} striped bordered hover>
     <thead>
