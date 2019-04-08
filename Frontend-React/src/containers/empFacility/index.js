@@ -20,6 +20,7 @@ class EmpFacility extends React.Component {
       packages: List([]),
       selectedPackages: List([]),
       trucks: List([]),
+      type: '',
       selectedTruck: 'Choose a Truck',
       notification: { is: false, message: '', type: '', header: '' }
     };
@@ -27,13 +28,15 @@ class EmpFacility extends React.Component {
     this.makeTR = this.makeTR.bind(this);
     this.getPackages = this.getPackages.bind(this);
     this.getTrucks = this.getTrucks.bind(this);
+    this.getFacilityType = this.getFacilityType.bind(this);
     this.handleCheckbox = this.handleCheckbox.bind(this);
     this.handleMoveButton = this.handleMoveButton.bind(this);
   }
 
   componentDidMount() {
-    this.getPackages()
+    this.getPackages();
     this.getTrucks();
+    this.getFacilityType();
   }
 
 
@@ -82,6 +85,20 @@ class EmpFacility extends React.Component {
       })
   };
 
+  getFacilityType = () => {
+    apiPost('/facility/type', { facilityID: this.state.facilityID })
+      .then(resp => {
+        if (resp.type) {
+          this.setState({ type: resp.type })
+        } else {
+          this.setState({ notification: { is: true, message: 'Could not get facility type.', type: 'danger', header: 'Error!' } })
+        }
+      })
+      .catch(error => {
+        this.setState({ notification: { is: true, message: 'Could not get facility type.', type: 'danger', header: 'Error!' } })
+      })
+  };
+
   handleCheckbox = (event) => {
     const checkbox = document.getElementById(event.target.id);
     if (checkbox.checked) {
@@ -122,7 +139,8 @@ class EmpFacility extends React.Component {
             <Card.Header>Control Center</Card.Header>
             <Card.Body>
               <Card.Title>Employee Actions</Card.Title>
-              <Form.Row style ={{ width: 500, margin: '0 auto', textAlign: 'center'  }}>
+              <Form.Row style ={{ width: 700, margin: '0 auto', textAlign: 'center'  }}>
+                { this.state.type === 'Drop Off' ? <Button style={ControlButtonStyle} variant='dark'> Check in Package </Button> : <Button style={ControlButtonStyle} variant='dark'> Check in Package </Button> }
                 <Button variant="info" style={ControlButtonStyle} onClick={this.handleMoveButton}>Move Packages into Truck</Button>
                 <Form.Group as={Col}>
                   <Form.Control as='select' value={this.state.selectedTruck} onChange={this.handleTruckChange}>

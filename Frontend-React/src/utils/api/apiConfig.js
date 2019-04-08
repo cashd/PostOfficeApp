@@ -32,6 +32,8 @@ export const getJSONroute = (route) => {
       return 'api/routes/truckDeliver.json';
     case '/facility/move':
       return 'api/routes/facilityMove.json';
+    case '/facility/type':
+      return 'api/routes/facilityType.json';
     default:
       return '';
   }
