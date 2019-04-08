@@ -143,7 +143,7 @@ class CustomerHome extends React.Component {
     </Table>
 
     <div style={{ marginTop: '3%' }}>
-      <h1>Packages en-route to you</h1>
+      <h1>Packages en-route to you:</h1>
     </div>
       <Table style={tableStyle} striped bordered hover>
     <thead>
