@@ -31,13 +31,22 @@ class Navigation extends React.Component {
                 integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS"
                 crossOrigin="anonymous"
             />
-            <Navbar bg="primary" variant="dark">
-                <Navbar.Brand href="/">T9 ~ Post Office</Navbar.Brand>
+            <Navbar bg="primary" variant="dark" bg='dark'>
+                <Navbar.Brand href="/">
+                  <img
+                    src="/logo.png"
+                    width="50"
+                    height="50"
+                    className="d-inline-block align-top"
+                    alt="logo"
+                  />
+                </Navbar.Brand>
                 <Nav className="mr-auto">
                   <Nav.Link href="/">Home</Nav.Link>
                   { isManager() && existFacility() ? <Nav.Link href="/manager">Manage Facility</Nav.Link> : null }
                 </Nav>
                 <Form inline>
+                  { isAuth() ? null : <Button href='/signup' variant="outline-light" style={{ marginRight: 22 }}>Signup</Button> }
                   { isAuth() ? <Button onClick={this.logout} variant="outline-light">Logout</Button> : <Button href='/login' variant="outline-light">Login</Button> }
                 </Form>
             </Navbar>
