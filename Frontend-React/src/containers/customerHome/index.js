@@ -122,7 +122,7 @@ class CustomerHome extends React.Component {
       </Card>
 
 
-      <div style={{ marginTop: '3%' }}>
+      <div style={{ marginTop: '2%' }}>
         <h1>Your Packages:</h1>
       </div>
     <Table style={tableStyle} striped bordered hover>
@@ -142,7 +142,7 @@ class CustomerHome extends React.Component {
     </tbody>
     </Table>
 
-    <div style={{ marginTop: '3%' }}>
+    <div style={{ marginTop: '2%' }}>
       <h1>Packages en-route to you:</h1>
     </div>
       <Table style={tableStyle} striped bordered hover>
