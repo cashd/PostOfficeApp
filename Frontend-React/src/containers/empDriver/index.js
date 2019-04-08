@@ -125,7 +125,7 @@ class EmpDriver extends React.Component {
   };
 
   handleDeliverButton = (event) => {
-    apiPost('/truck/deliver', { packageID: event.target.id, truckID: this.state.truckID })
+    apiPost('/truck/deliver', { packageID: event.target.id, driverID: this.state.truckID })
       .then(resp => {
         console.log(resp);
         if (resp.success && resp.success === true) {
