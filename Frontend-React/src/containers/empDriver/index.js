@@ -77,11 +77,11 @@ class EmpDriver extends React.Component {
         if (resp.packages && resp.packages.length !== 0) {
           this.setState({ packages: List(resp.packages) })
         } else {
-          this.setState({ notification: { is: true, message: 'There are currently no packages at the facility!', type: 'warning', header: 'No packages.' } })
+          this.setState({ notification: { is: true, message: 'There are currently no packages in this truck!', type: 'warning', header: 'No packages.' } })
         }
       })
       .catch(error => {
-        this.setState({ notification: { is: true, message: 'Could not get facilities.', type: 'danger', header: 'Error!' } })
+        this.setState({ notification: { is: true, message: 'Could not get packages.', type: 'danger', header: 'Error!' } })
       })
   };
 
