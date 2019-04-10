@@ -1,7 +1,6 @@
 import React from 'react'
 import Button from 'react-bootstrap/Button'
 import Form from 'react-bootstrap/Form'
-import Col from 'react-bootstrap/Col'
 import Card from 'react-bootstrap/Card'
 import Table from 'react-bootstrap/Table'
 import { List } from 'immutable'
@@ -15,7 +14,7 @@ class Tracking extends React.Component {
     console.log(props.location);
     this.state = {
       notification: { is: false, message: '', type: '', header: '' },
-      packageID: props.location.hash ? props.location.hash.substr(1) : null,
+      packageID: props.location.hash ? props.location.hash.substr(1) : undefined,
       history: List([]),
       showHistory: !!props.location.hash,
     };
@@ -53,6 +52,7 @@ class Tracking extends React.Component {
   };
 
   handleSubmit = () => {
+    console.log(this.state.packageID);
     if (this.state.packageID) {
       this.getHistory()
     }
@@ -92,7 +92,7 @@ class Tracking extends React.Component {
             </Table>
             : (
               <Form style={formStyle}>
-                <Form.Group controlID='formGroupTracking'>
+                <Form.Group>
                   <Form.Label> Enter your package ID. </Form.Label>
                   <Form.Control style={{ textAlign: 'center' }} size='lg' placeholder='123' value={this.state.packageID} onChange={this.handlePackageID}  />
                   <Button size='lg' style={{marginTop: '4%'}} onClick={this.handleSubmit} > Submit </Button>

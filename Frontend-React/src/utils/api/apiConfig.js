@@ -36,6 +36,8 @@ export const getJSONroute = (route) => {
       return 'api/routes/facilityType.json';
     case '/package/history':
       return 'api/routes/tracking.json';
+    case '/facility/checkin':
+      return 'api/routes/checkInPackage.json';
     default:
       return '';
   }
