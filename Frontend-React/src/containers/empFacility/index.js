@@ -22,7 +22,9 @@ class EmpFacility extends React.Component {
       trucks: List([]),
       type: '',
       selectedTruck: 'Choose a Truck',
-      notification: { is: false, message: '', type: '', header: '' }
+      notification: { is: false, message: '', type: '', header: '' },
+      showCheckIn: false,
+      checkInPackageID: '',
     };
 
     this.makeTR = this.makeTR.bind(this);
@@ -130,17 +132,45 @@ class EmpFacility extends React.Component {
     this.setState({ selectedTruck: event.target.value });
   };
 
+  handleCheckInButton = () => {
+    if (this.state.checkInPackageID) {
+      apiPost('/facility/checkin', { packageID: this.state.checkInPackageID, facilityID: this.state.facilityID })
+        .then(resp => {
+          if (resp.success && resp.success === true) {
+            window.location.reload()
+          } else {
+            this.setState({ notification: { is: true, message: 'Could not checkin', type: 'danger', header: 'Error!' } })
+          }
+        })
+        .catch(error => {
+          this.setState({ notification: { is: true, message: 'Could not checkin', type: 'danger', header: 'Error!' } })
+        })
+    }
+  };
+
   render() {
     return (
       <div style={{backgroundColor: 'whitesmoke'}}>
         { this.state.notification.is ? (<Alert variant={this.state.notification.type} dismissible> <Alert.Heading>{ this.state.notification.header }</Alert.Heading><p>{ this.state.notification.message }</p></Alert>): null }
         <div>
+          <Modal show={this.state.showCheckIn} onHide={() => { this.setState({ showCheckIn: !this.state.showCheckIn }) }} name='ShowReport'>
+            <Modal.Header closeButton>
+            <Modal.Title>Check in Package</Modal.Title>
+            </Modal.Header>
+            <Modal.Body style={{ textAlign: 'center', margin: '0 auto' }}>
+              <Form.Group>
+                <Form.Label> Enter the package ID. </Form.Label>
+                <Form.Control style={{ textAlign: 'center' }} size='lg' placeholder='123' value={this.state.checkInPackageID} onChange={(event) => {this.setState({ checkInPackageID: event.target.value })}}  />
+                <Button size='lg' style={{marginTop: '4%'}} onClick={this.handleCheckInButton} > Submit </Button>
+              </Form.Group>
+            </Modal.Body>
+          </Modal>
           <Card className="text-center">
             <Card.Header>Control Center</Card.Header>
             <Card.Body>
               <Card.Title>Employee Actions</Card.Title>
               <Form.Row style ={{ width: 700, margin: '0 auto', textAlign: 'center'  }}>
-                { this.state.type === 'Drop Off' ? <Button style={ControlButtonStyle} variant='dark'> Check in Package </Button> : <Button style={ControlButtonStyle} variant='dark'> Check in Package </Button> }
+                { this.state.type === 'Drop Off' ? <Button style={ControlButtonStyle} variant='dark' onClick={() => { this.setState({ showCheckIn: !this.state.showCheckIn }) }}> Check in Package </Button> : <Button style={ControlButtonStyle} variant='dark'> Check in Package </Button> }
                 <Button variant="info" style={ControlButtonStyle} onClick={this.handleMoveButton}>Move Packages into Truck</Button>
                 <Form.Group as={Col}>
                   <Form.Control as='select' value={this.state.selectedTruck} onChange={this.handleTruckChange}>
