@@ -34,6 +34,8 @@ export const getJSONroute = (route) => {
       return 'api/routes/facilityMove.json';
     case '/facility/type':
       return 'api/routes/facilityType.json';
+    case '/package/history':
+      return 'api/routes/tracking.json';
     default:
       return '';
   }
