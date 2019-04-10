@@ -6,6 +6,7 @@ import Login from '../login'
 import Navigation from '../navbar'
 import signup from '../signup'
 import Manager from '../manager'
+import Tracking from '../tracking'
 
 const App = () => (
   <div>
@@ -24,6 +25,7 @@ const App = () => (
       <Route exact path="/login" component={Login} />
       <Route exact path="/signup" component={signup} />
       <Route exact path='/manager' component={Manager} />
+      <Route path='/tracking' component={Tracking} />
     </main>
   </div>
 );

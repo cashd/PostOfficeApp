@@ -44,6 +44,7 @@ class Navigation extends React.Component {
                 <Nav className="mr-auto">
                   <Nav.Link href="/">Home</Nav.Link>
                   { isManager() && existFacility() ? <Nav.Link href="/manager">Manage Facility</Nav.Link> : null }
+                  <Nav.Link href="/tracking">Track Package</Nav.Link>
                 </Nav>
                 <Form inline>
                   { isAuth() ? null : <Button href='/signup' variant="outline-light" style={{ marginRight: 22 }}>Signup</Button> }
