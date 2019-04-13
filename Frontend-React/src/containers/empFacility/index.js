@@ -170,7 +170,7 @@ class EmpFacility extends React.Component {
             <Card.Body>
               <Card.Title>Employee Actions</Card.Title>
               <Form.Row style ={{ width: 700, margin: '0 auto', textAlign: 'center'  }}>
-                { this.state.type === 'Drop Off' ? <Button style={ControlButtonStyle} variant='dark' onClick={() => { this.setState({ showCheckIn: !this.state.showCheckIn }) }}> Check in Package </Button> : <Button style={ControlButtonStyle} variant='dark'> Check in Package </Button> }
+                { this.state.type === 'Drop Off' ? <Button style={ControlButtonStyle} variant='dark' onClick={() => { this.setState({ showCheckIn: !this.state.showCheckIn }) }}> Check in Package </Button> : <Button style={ControlButtonStyle} variant='dark' disabled> Check in Package </Button> }
                 <Button variant="info" style={ControlButtonStyle} onClick={this.handleMoveButton}>Move Packages into Truck</Button>
                 <Form.Group as={Col}>
                   <Form.Control as='select' value={this.state.selectedTruck} onChange={this.handleTruckChange}>
