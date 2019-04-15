@@ -10,6 +10,10 @@ import Table from 'react-bootstrap/Table'
 import { List } from 'immutable'
 import { apiPost } from '../../utils/api'
 import Alert from 'react-bootstrap/Alert';
+import {
+  BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, Legend,
+} from 'recharts';
+
 
 class Manager extends React.Component {
   constructor(props) {
@@ -118,6 +122,23 @@ class Manager extends React.Component {
   };
 
   render() {
+    const data = [
+  {
+    name: 'January', Packages: 0, Employees: 0,
+  },
+  {
+    name: 'February', Packages: 0, Employees: 2,
+  },
+  {
+    name: 'March', Packages: 4, Employees: 3,
+  },
+  {
+    name: 'April', Packages: 12, Employees: this.state.employees.size,
+  },
+  {
+    name: 'May', Packages: 0, Employees: 0,
+  },
+];
     return (
       <div>
         { this.state.notification.is ? (<Alert variant={this.state.notification.type} dismissible> <Alert.Heading>{ this.state.notification.header }</Alert.Heading><p>{ this.state.notification.message }</p></Alert>): null }
@@ -211,6 +232,23 @@ class Manager extends React.Component {
           <Modal.Title>Review Facility Report</Modal.Title>
           </Modal.Header>
           <Modal.Body>
+            <BarChart
+              width={500}
+              height={300}
+              data={data}
+              margin={{
+                top: 5, right: 30, left: 20, bottom: 5,
+              }}
+              style={{marginLeft: '-7%'}}
+            >
+            <CartesianGrid strokeDasharray="3 3" />
+            <XAxis dataKey="name" />
+            <YAxis />
+            <Tooltip />
+            <Legend />
+            <Bar dataKey="Packages" fill="#8884d8" />
+            <Bar dataKey="Employees" fill="#82ca9d" />
+            </BarChart>
           </Modal.Body>
         </Modal>
 
@@ -249,63 +287,5 @@ const h3Style = {
   marginTop: '2.5%',
 };
 
-// const states = List([
-//     'Alabama',
-//     'Alaska',
-//     'Arizona',
-//     'Arkansas',
-//     'California',
-//     'Colorado',
-//     'Connecticut',
-//     'Delaware',
-//     'Florida',
-//     'Georgia',
-//     'Hawaii',
-//     'Idaho',
-//     'Illinois',
-//     'Indiana',
-//     'Iowa',
-//     'Kansas',
-//     'Kentucky',
-//     'Louisiana',
-//     'Maine',
-//     'Maryland',
-//     'Massachusetts',
-//     'Michigan',
-//     'Minnesota',
-//     'Mississippi',
-//     'Missouri',
-//     'Montana',
-//     'Nebraska',
-//     'Nevada',
-//     'New Hampshire',
-//     'New Jersey',
-//     'New Mexico',
-//     'New York',
-//     'North Carolina',
-//     'North Dakota',
-//     'Ohio',
-//     'Oklahoma',
-//     'Oregon',
-//     'Pennsylvania',
-//     'Rhode Island',
-//     'South Carolina',
-//     'South Dakota',
-//     'Tennessee',
-//     'Texas',
-//     'Utah',
-//     'Vermont',
-//     'Virginia',
-//     'Washington',
-//     'West Virginia',
-//     'Wisconsin',
-//     'Wyoming',
-//     'District of Columbia',
-//     'Puerto Rico',
-//     'Guam',
-//     'American Samoa',
-//     'U.S. Virgin Islands',
-//     'Northern Mariana Islands',
-// ]);
 
 export default Manager;
