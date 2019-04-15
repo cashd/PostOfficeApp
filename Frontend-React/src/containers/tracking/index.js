@@ -110,10 +110,6 @@ const tableStyle = {
   textAlign: "center",
 };
 
-const h3Style = {
-  marginTop: '2.5%',
-};
-
 const formStyle = {
   width: '40%',
   margin: '0 auto',
