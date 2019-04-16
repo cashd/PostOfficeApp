@@ -234,6 +234,10 @@ class CustomerHome extends React.Component {
           <Button style={ { marginLeft: '10px' } } size='lg' variant='info' onClick={this.openStatusReport}>Review Package Status Report</Button>
         </Card.Body>
       </Card>
+      <Card>
+        <Card.Header as='h5'>Package Statistics</Card.Header>
+        <Card.Body><h5>Average Weight: { this.state.packages.map(p => p.packageWeight).reduce((prev, curr) => prev+curr) }</h5></Card.Body>
+      </Card>
 
       <div style={{ marginTop: '2%' }}>
         <h1>Your Packages:</h1>
