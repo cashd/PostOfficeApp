@@ -162,6 +162,7 @@ class CustomerHome extends React.Component {
 
   render() {
     return <div>
+      <link rel='stylesheet' href='/modalCss.css' />
       { this.state.notification.is ? (<Alert variant={this.state.notification.type} dismissible> <Alert.Heading>{ this.state.notification.header }</Alert.Heading><p>{ this.state.notification.message }</p></Alert>): null }
       <Modal show={this.state.newPackageViewStatus} onHide={this.openNewPackage}>
         <Modal.Header closeButton>
@@ -197,16 +198,16 @@ class CustomerHome extends React.Component {
         </Modal.Footer>
       </Modal>
 
-      <Modal show={this.state.showPackStatusReport} onHide={this.openStatusReport}>
+      <Modal show={this.state.showPackStatusReport} size='lg' onHide={this.openStatusReport}>
         <Modal.Header closeButton>
           <Modal.Title>Customer Package Status Report</Modal.Title>
         </Modal.Header>
         <Modal.Body>
           <ResponsiveContainer width={'100%'} height={400}>
-            <PieChart width={500} height={400}>
+            <PieChart width={500} height={500}>
               <Pie
                 data={this.state.statusData}
-                cx={250}
+                cx={375}
                 cy={200}
                 label={this.renderCustomizedLabel}
                 outerRadius={120}
