@@ -9,6 +9,9 @@ import Card from 'react-bootstrap/Card'
 import { List } from 'immutable'
 import {apiPost} from '../../utils/api';
 import Alert from "react-bootstrap/Alert";
+import {
+  PieChart, Pie, LabelList, Cell, ResponsiveContainer,
+} from 'recharts';
 
 class CustomerHome extends React.Component {
   constructor(props) {
@@ -18,10 +21,12 @@ class CustomerHome extends React.Component {
       packages: List([]),
       inPackages: List([]),
       newPackageViewStatus: false,
+      showPackStatusReport: false,
       error: { is: false, msg: '' },
       newPackEmail: '',
       newPackAddress: '',
       newPackWeight: 0,
+      statusData: [],
       notification: { is: false, message: '', type: '', header: '' }
 };
     this.openNewPackage = this.openNewPackage.bind(this);
@@ -32,15 +37,22 @@ class CustomerHome extends React.Component {
     this.handleNewPackageWeight = this.handleNewPackageWeight.bind(this);
     this.getPackages = this.getPackages.bind(this);
     this.getIncomingPackages = this.getIncomingPackages.bind(this);
+    this.computeData = this.computeData.bind(this);
+    this.renderCustomizedLabel = this.renderCustomizedLabel.bind(this);
   }
 
   componentDidMount() {
     this.getPackages();
     this.getIncomingPackages();
+    //this.computeData();
   }
 
   openNewPackage = () => {
     this.setState({ newPackageViewStatus: !this.state.newPackageViewStatus })
+  };
+
+  openStatusReport = () => {
+    this.setState({ showPackStatusReport: !this.state.showPackStatusReport })
   };
 
   newPackageSubmit = () => {
@@ -92,7 +104,7 @@ class CustomerHome extends React.Component {
   getPackages = () => {
     apiPost('/customer/packages', { id: this.state.id })
       .then(resp => {
-        this.setState({ packages: List(resp.packages) })
+        this.setState({ packages: List(resp.packages) }, () => { this.computeData() })
       })
       .catch(error => {
         this.setState({ notification: { is: true, message: 'Could not get packages.', type: 'danger', header: 'Error!' } })
@@ -108,6 +120,45 @@ class CustomerHome extends React.Component {
         this.setState({ notification: { is: true, message: 'Could not get packages.', type: 'danger', header: 'Error!' } })
       })
   };
+
+  renderCustomizedLabel = ({
+  cx, cy, midAngle, innerRadius, outerRadius, percent, index,
+}) => {
+   const radius = 25 + innerRadius + (outerRadius - innerRadius);
+  const x = cx + radius * Math.cos(-midAngle * RADIAN);
+  const y = cy + radius * Math.sin(-midAngle * RADIAN);
+
+  return (
+    <text x={x} y={y} fill="black" textAnchor={x > cx ? 'start' : 'end'} dominantBaseline="middle">
+      {`${this.state.statusData[index].name} ${(percent * 100).toFixed(0)}%`}
+    </text>
+  );
+};
+
+  computeData = () => {
+    console.log(this.state.packages)
+    let data = [
+      { name: 'Label Created', value: 0 },
+      { name: 'Drop Off', value: 0 },
+      { name: 'In Sorting', value: 0 },
+      { name: 'In Transit', value: 0 },
+      { name: 'Out for Delivery', value: 0 },
+      { name: 'Delivered', value: 0 }
+    ];
+    this.state.packages.forEach((p) => {
+      for (let i=0; i < 6; i++) {
+        if (p.deliveryStatus === data[i].name) {
+          console.log(p.deliveryStatus, data[i].name);
+          data[i].value += 1
+        }
+      }
+    });
+    data = data.filter((i) => {
+      return i.value !== 0
+    });
+    this.setState({ statusData: data }, () => { console.log(this.state.statusData) })
+  }
+  ;
 
   render() {
     return <div>
@@ -145,11 +196,41 @@ class CustomerHome extends React.Component {
           </Button>
         </Modal.Footer>
       </Modal>
+
+      <Modal show={this.state.showPackStatusReport} onHide={this.openStatusReport}>
+        <Modal.Header closeButton>
+          <Modal.Title>Customer Package Status Report</Modal.Title>
+        </Modal.Header>
+        <Modal.Body>
+          <ResponsiveContainer width={'100%'} height={400}>
+            <PieChart width={500} height={400}>
+              <Pie
+                data={this.state.statusData}
+                cx={250}
+                cy={200}
+                label={this.renderCustomizedLabel}
+                outerRadius={120}
+                fill="#8884d8"
+                dataKey="value"
+              >
+                {
+                  this.state.statusData.map((entry, index) => <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />)
+                }
+              </Pie>
+            </PieChart>
+          </ResponsiveContainer>
+        </Modal.Body>
+        <Modal.Footer>
+        </Modal.Footer>
+      </Modal>
+
+
       <Card className="text-center">
         <Card.Header>Control Center</Card.Header>
         <Card.Body>
           <Card.Title>Customer Actions</Card.Title>
           <Button size='lg' variant='success' onClick={this.openNewPackage}>Ship a new package</Button>
+          <Button style={ { marginLeft: '10px' } } size='lg' variant='info' onClick={this.openStatusReport}>Review Package Status Report</Button>
         </Card.Body>
       </Card>
 
@@ -195,6 +276,9 @@ class CustomerHome extends React.Component {
 </div>
     }
 }
+const COLORS = ['#0088FE', '#00C49F', '#FFBB28', '#FF8042', '#00C49F', '#FFBB28', '#FF8042'];
+
+const RADIAN = Math.PI / 180;
 
 const tableStyle = {
   margin: '0 auto',

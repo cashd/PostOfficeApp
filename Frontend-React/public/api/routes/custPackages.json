@@ -6,7 +6,7 @@
       "recipientEmail": "tom@yahoo.com",
       "senderAddress": "123 Main St.",
       "recipientAddress": "400 Market Ln.",
-      "deliveryStatus": "in-transit",
+      "deliveryStatus": "Label Created",
       "packageWeight": "2.0oz"
     },
     {
@@ -15,7 +15,7 @@
       "recipientEmail": "lauren@yahoo.com",
       "senderAddress": "123 Main St.",
       "recipientAddress": "666 Devil Ln.",
-      "deliveryStatus": "in-transit",
+      "deliveryStatus": "In Sorting",
       "packageWeight": "2.0oz"
     },
     {
@@ -24,7 +24,7 @@
       "recipientEmail": "bradfyi@yahoo.com",
       "senderAddress": "123 Main St.",
       "recipientAddress": "345 Cullen Blvd.",
-      "deliveryStatus": "in-transit",
+      "deliveryStatus": "Delivered",
       "packageWeight": "2.0oz"
     }
   ]
