@@ -44,7 +44,6 @@ class CustomerHome extends React.Component {
   componentDidMount() {
     this.getPackages();
     this.getIncomingPackages();
-    //this.computeData();
   }
 
   openNewPackage = () => {
@@ -78,7 +77,7 @@ class CustomerHome extends React.Component {
     return (
       <React.Fragment key={id}>
         <tr>
-          <td> { p.id } </td>
+          <td> <a href={'/tracking#' + p.id} >{p.id}</a></td>
           <td> { p.senderEmail } </td>
           <td> { p.recipientEmail } </td>
           <td> { p.senderAddress } </td>
@@ -136,7 +135,6 @@ class CustomerHome extends React.Component {
 };
 
   computeData = () => {
-    console.log(this.state.packages)
     let data = [
       { name: 'Label Created', value: 0 },
       { name: 'Drop Off', value: 0 },
@@ -157,12 +155,10 @@ class CustomerHome extends React.Component {
       return i.value !== 0
     });
     this.setState({ statusData: data }, () => { console.log(this.state.statusData) })
-  }
-  ;
+  };
 
   render() {
     return <div>
-      <link rel='stylesheet' href='/modalCss.css' />
       { this.state.notification.is ? (<Alert variant={this.state.notification.type} dismissible> <Alert.Heading>{ this.state.notification.header }</Alert.Heading><p>{ this.state.notification.message }</p></Alert>): null }
       <Modal show={this.state.newPackageViewStatus} onHide={this.openNewPackage}>
         <Modal.Header closeButton>
@@ -236,7 +232,7 @@ class CustomerHome extends React.Component {
       </Card>
       <Card>
         <Card.Header as='h5'>Package Statistics</Card.Header>
-        <Card.Body><h5>Average Weight: { this.state.packages.map(p => p.packageWeight).reduce((prev, curr) => prev+curr) }</h5></Card.Body>
+        <Card.Body><h5>Average Weight: { this.state.packages.map(p => Number(p.packageWeight.substr(0,p.packageWeight.indexOf('o')))).reduce((prev, curr) => prev+curr)/this.state.packages.size + 'oz' }</h5></Card.Body>
       </Card>
 
       <div style={{ marginTop: '2%' }}>

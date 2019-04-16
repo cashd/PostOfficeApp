@@ -11,7 +11,7 @@ import { List } from 'immutable'
 import { apiPost } from '../../utils/api'
 import Alert from 'react-bootstrap/Alert';
 import {
-  BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, Legend,
+  BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer, PieChart, Pie, Cell,
 } from 'recharts';
 
 
@@ -39,7 +39,9 @@ class Manager extends React.Component {
       },
       showNewEmp: false,
       showReport: false,
-      notification: { is: false, message: '', type: '', header: '' }
+      showPackStatusReport: false,
+      notification: { is: false, message: '', type: '', header: '' },
+      statusData: [],
 };
     this.makeTR = this.makeTR.bind(this);
     this.handleChangeNewEmpView = this.handleChangeNewEmpView.bind(this);
@@ -47,13 +49,15 @@ class Manager extends React.Component {
     this.handleNewEmpChange = this.handleNewEmpChange.bind(this);
     this.handleChangeReportView = this.handleChangeReportView.bind(this);
     this.handleNewEmpSubmit = this.handleNewEmpSubmit.bind(this);
+    this.renderCustomizedLabel = this.renderCustomizedLabel.bind(this);
+    this.computeData = this.computeData.bind(this);
     }
 
   getEmployees = (payload) => {
     apiPost('/facility/employees', payload)
         .then((resp) => {
           console.log(resp);
-          this.setState({ employees: List(resp.employees) })
+          this.setState({ employees: List(resp.employees) }, this.computeData)
         })
         .catch((error) => {
           this.setState({ notification: { is: true, message: 'Could not get employees', type: 'danger', header: 'Error!' } })
@@ -79,6 +83,7 @@ class Manager extends React.Component {
             <td> { e.workPhoneNum } </td>
             <td> { e.workEmail } </td>
             <td> { e.salary } </td>
+            <td> <Button variant='info' href={'/employee/edit#' + e.id}>Edit</Button> </td>
           </tr>
         </React.Fragment>)
   };
@@ -89,6 +94,10 @@ class Manager extends React.Component {
 
   handleChangeReportView = () => {
     this.setState({ showReport: !this.state.showReport })
+  };
+
+  openStatusReport = () => {
+    this.setState({ showPackStatusReport: !this.state.showPackStatusReport })
   };
 
   handleNewEmpChange = (event) => {
@@ -121,6 +130,45 @@ class Manager extends React.Component {
     }
   };
 
+  computeData = () => {
+    let data = [
+      { name: 'Clerk', value: 0 },
+      { name: 'Supervisor', value: 0 },
+      { name: 'Sorter', value: 0 },
+      { name: 'Security', value: 0 },
+      { name: 'Driver', value: 0 },
+      { name: 'Carrier', value: 0 }
+    ];
+    console.log(this.state.employees);
+    this.state.employees.forEach((e) => {
+      console.log(e)
+      for (let i=0; i < 6; i++) {
+        if (e.position === data[i].name) {
+          console.log(e.position, data[i].name);
+          data[i].value += 1
+        }
+      }
+    });
+    data = data.filter((i) => {
+      return i.value !== 0
+    });
+    this.setState({ statusData: data }, () => { console.log(this.state.statusData) })
+  };
+
+    renderCustomizedLabel = ({
+  cx, cy, midAngle, innerRadius, outerRadius, percent, index,
+}) => {
+   const radius = 25 + innerRadius + (outerRadius - innerRadius);
+  const x = cx + radius * Math.cos(-midAngle * RADIAN);
+  const y = cy + radius * Math.sin(-midAngle * RADIAN);
+
+  return (
+    <text x={x} y={y} fill="black" textAnchor={x > cx ? 'start' : 'end'} dominantBaseline="middle">
+      {`${this.state.statusData[index].name} ${(percent * 100).toFixed(0)}%`}
+    </text>
+  );
+};
+
   render() {
     const data = [
   {
@@ -149,9 +197,37 @@ class Manager extends React.Component {
               <Card.Title>Managerial Actions</Card.Title>
               <Button size='lg' variant="success" style={ControlButtonStyle} onClick={this.handleChangeNewEmpView}>Add Employee</Button>
               <Button size='lg' variant="info" style={ControlButtonStyle} onClick={this.handleChangeReportView}>Review Facility Report</Button>
+              <Button style={ControlButtonStyle} size='lg' variant='dark' onClick={this.openStatusReport}>Review Employee Role Report</Button>
             </Card.Body>
           </Card>
         </div>
+
+        <Modal show={this.state.showPackStatusReport} size='lg' onHide={this.openStatusReport}>
+        <Modal.Header closeButton>
+          <Modal.Title>Customer Package Status Report</Modal.Title>
+        </Modal.Header>
+        <Modal.Body>
+          <ResponsiveContainer width={'100%'} height={400}>
+            <PieChart width={500} height={500}>
+              <Pie
+                data={this.state.statusData}
+                cx={375}
+                cy={200}
+                label={this.renderCustomizedLabel}
+                outerRadius={120}
+                fill="#8884d8"
+                dataKey="value"
+              >
+                {
+                  this.state.employees.map((entry, index) => <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />)
+                }
+              </Pie>
+            </PieChart>
+          </ResponsiveContainer>
+        </Modal.Body>
+        <Modal.Footer>
+        </Modal.Footer>
+      </Modal>
 
         <Modal show={this.state.showNewEmp} onHide={this.handleChangeNewEmpView} name='CreateEmp'>
           <Modal.Header closeButton>
@@ -263,6 +339,7 @@ class Manager extends React.Component {
               <th>Work Phone</th>
               <th>Work Email</th>
               <th>Salary</th>
+              <th>Edit Employee</th>
             </tr>
           </thead>
           <tbody>
@@ -286,6 +363,10 @@ const ControlButtonStyle = {
 const h3Style = {
   marginTop: '2.5%',
 };
+
+const COLORS = ['#0088FE', '#00C49F', '#FFBB28', '#FF8042', '#00C49F', '#FFBB28', '#FF8042'];
+
+const RADIAN = Math.PI / 180;
 
 
 export default Manager;
