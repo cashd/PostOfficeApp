@@ -364,7 +364,7 @@ const h3Style = {
   marginTop: '2.5%',
 };
 
-const COLORS = ['#0088FE', '#00C49F', '#FFBB28', '#FF8042', '#00C49F', '#FFBB28', '#FF8042'];
+const COLORS = ['#fe00de', '#00C49F', '#84fffa', '#ff0200', '#00C49F', '#FFBB28', '#FF8042'];
 
 const RADIAN = Math.PI / 180;
 
