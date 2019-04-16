@@ -7,6 +7,7 @@ import Navigation from '../navbar'
 import signup from '../signup'
 import Manager from '../manager'
 import Tracking from '../tracking'
+import EditEmployee from '../editEmployee'
 
 const App = () => (
   <div>
@@ -26,6 +27,7 @@ const App = () => (
       <Route exact path="/signup" component={signup} />
       <Route exact path='/manager' component={Manager} />
       <Route path='/tracking' component={Tracking} />
+      <Route path='/employee/edit' component={EditEmployee}/>
     </main>
   </div>
 );
