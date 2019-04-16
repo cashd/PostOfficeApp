@@ -184,7 +184,7 @@ class CustomerHome extends React.Component {
         <th>Recipient Email</th>
         <th>Sender Address</th>
         <th>Recipient Address</th>
-        <th>Status Address</th>
+        <th>Status</th>
         <th>Weight</th>
       </tr>
     </thead>
