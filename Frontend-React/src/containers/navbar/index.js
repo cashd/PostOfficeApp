@@ -6,6 +6,7 @@ import Form from 'react-bootstrap/Form'
 import Button from 'react-bootstrap/Button'
 import { isAuth, isManager, existFacility } from '../../utils/auth';
 import Cookie from 'js-cookie'
+import { push } from 'connected-react-router'
 
 class Navigation extends React.Component {
   constructor(props) {
@@ -20,7 +21,7 @@ class Navigation extends React.Component {
     Cookie.remove('driverID');
     Cookie.remove('truckID');
     Cookie.remove('isManager');
-    window.location.reload()
+    push('/')
   };
 
     render() {
