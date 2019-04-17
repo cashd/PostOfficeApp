@@ -21,7 +21,7 @@ class Navigation extends React.Component {
     Cookie.remove('driverID');
     Cookie.remove('truckID');
     Cookie.remove('isManager');
-    window.location.href = 'www.team9postoffice.ga/';
+    window.location.href = '/';
   };
 
     render() {
