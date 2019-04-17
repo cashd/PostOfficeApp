@@ -110,7 +110,7 @@ class EditEmployee extends React.Component {
           <Form.Row>
             <Form.Group as={Col} controlId='formGridEmail'>
               <Form.Label> Work Email </Form.Label>
-              <Form.Control placeholder='example@website.com' name='email' value={this.state.newEmp.workEmail} onChange={this.handleNewEmpChange} />
+              <Form.Control placeholder='example@website.com' name='workEmail' value={this.state.newEmp.workEmail} onChange={this.handleNewEmpChange} />
             </Form.Group>
             <Form.Group as={Col} controlId='formGridPosition'>
               <Form.Label> Position </Form.Label>
@@ -124,7 +124,7 @@ class EditEmployee extends React.Component {
             </Form.Group>
             <Form.Group as={Col} controlId='formGridPhone'>
               <Form.Label> Work Phone </Form.Label>
-              <Form.Control placeholder='832-123-123' name='phoneNum' value={this.state.newEmp.workPhoneNum} onChange={this.handleNewEmpChange}  />
+              <Form.Control placeholder='832-123-123' name='workPhoneNum' value={this.state.newEmp.workPhoneNum} onChange={this.handleNewEmpChange}  />
             </Form.Group>
           </Form.Row>
           <Form.Row>
