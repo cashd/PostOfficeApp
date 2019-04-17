@@ -75,11 +75,11 @@ class EditEmployee extends React.Component {
         role: 'Choose...',
       }, notification: { is: true, message: 'Changed employee information.', type: 'success', header: 'Success!' } })
           } else {
-            this.setState({ notification: { is: true, message: 'Could not add employee. Invalid input or employee already exist.', type: 'danger', header: 'Error!' } })
+            this.setState({ notification: { is: true, message: 'Could not edit employee info.', type: 'danger', header: 'Error!' } })
           }
         })
         .catch(error => {
-          this.setState({ notification: { is: true, message: 'Could not add employee. Invalid input or employee already exist.', type: 'danger', header: 'Error!' } })
+          this.setState({ notification: { is: true, message: 'Could not edit employee info.', type: 'danger', header: 'Error!' } })
         })
     }
   };
