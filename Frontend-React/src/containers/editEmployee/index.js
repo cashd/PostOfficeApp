@@ -161,6 +161,7 @@ class EditEmployee extends React.Component {
               </Form.Control>
             </Form.Group>
           </Form.Row>
+        <Button variant='success' onClick={this.handleUpdateSubmit}> Submit </Button>
       </div>
     )
     }
