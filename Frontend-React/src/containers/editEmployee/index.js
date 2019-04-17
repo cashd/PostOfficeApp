@@ -44,7 +44,7 @@ class EditEmployee extends React.Component {
   getEmployee = () => {
     apiPost('/employee/info', { ID: this.state.id })
         .then((resp) => {
-          this.setState({ newEmp: {resp} })
+          this.setState({ newEmp: resp })
         })
         .catch((error) => {
           this.setState({ notification: { is: true, message: 'Could not edit employee.', type: 'danger', header: 'Error!' } })
