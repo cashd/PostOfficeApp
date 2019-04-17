@@ -6,7 +6,7 @@ import { apiPost } from '../../utils/api'
 import Alert from 'react-bootstrap/Alert';
 
 
-class EditEmployee extends React.Component {
+class EditCustomer extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -14,10 +14,8 @@ class EditEmployee extends React.Component {
       newEmp: {
         firstName: '',
         lastName: '',
-        workEmail: '',
-        position: '',
-        salary: '',
-        workPhoneNum: '',
+        email: '',
+        phoneNum: '',
         zip: '',
         state: '',
         address: '',
@@ -31,12 +29,12 @@ class EditEmployee extends React.Component {
     }
 
   getEmployee = () => {
-    apiPost('/employee/info', { ID: this.state.id })
+    apiPost('/customer/info', { ID: this.state.id })
         .then((resp) => {
           this.setState({ newEmp: resp })
         })
         .catch((error) => {
-          this.setState({ notification: { is: true, message: 'Could not get employee.', type: 'danger', header: 'Error!' } })
+          this.setState({ notification: { is: true, message: 'Could not get customer info.', type: 'danger', header: 'Error!' } })
         })
   };
 
@@ -53,7 +51,7 @@ class EditEmployee extends React.Component {
     handleUpdateSubmit = () => {
     const emp = this.state.newEmp;
     if (emp.workPhoneNum && emp.workEmail && emp.firstName && emp.lastName && emp.position && emp.salary && emp.zip && emp.address && emp.state && emp.city) {
-      apiPost('/employee/update', {
+      apiPost('/customer/update', {
         ID: this.state.id,
         ...this.state.newEmp
       })
@@ -63,16 +61,12 @@ class EditEmployee extends React.Component {
             this.setState({ newEmp: {
         firstName: '',
         lastName: '',
-        workEmail: '',
-        password: '',
-        position: '',
-        salary: '',
-        workPhoneNum: '',
+        email: '',
+        phoneNum: '',
         zip: '',
         state: '',
         address: '',
         city: '',
-        role: 'Choose...',
       }, notification: { is: true, message: 'Changed employee information.', type: 'success', header: 'Success!' } })
           } else {
             this.setState({ notification: { is: true, message: 'Could not add employee. Invalid input or employee already exist.', type: 'danger', header: 'Error!' } })
@@ -100,22 +94,12 @@ class EditEmployee extends React.Component {
           </Form.Row>
           <Form.Row>
             <Form.Group as={Col} controlId='formGridEmail'>
-              <Form.Label> Work Email </Form.Label>
-              <Form.Control placeholder='example@website.com' name='workEmail' value={this.state.newEmp.workEmail} onChange={this.handleNewEmpChange} />
-            </Form.Group>
-            <Form.Group as={Col} controlId='formGridPosition'>
-              <Form.Label> Position </Form.Label>
-              <Form.Control placeholder='Clerk' name='position' value={this.state.newEmp.position} onChange={this.handleNewEmpChange} />
-            </Form.Group>
-          </Form.Row>
-          <Form.Row>
-            <Form.Group as={Col} controlId='formGridSalary'>
-              <Form.Label> Salary </Form.Label>
-              <Form.Control placeholder='60000' name='salary' value={this.state.newEmp.salary} onChange={this.handleNewEmpChange}  />
+              <Form.Label> Email </Form.Label>
+              <Form.Control placeholder='example@website.com' name='email' value={this.state.newEmp.email} onChange={this.handleNewEmpChange} />
             </Form.Group>
             <Form.Group as={Col} controlId='formGridPhone'>
-              <Form.Label> Work Phone </Form.Label>
-              <Form.Control placeholder='832-123-123' name='workPhoneNum' value={this.state.newEmp.workPhoneNum} onChange={this.handleNewEmpChange}  />
+              <Form.Label> Phone </Form.Label>
+              <Form.Control placeholder='832-123-123' name='phoneNum' value={this.state.newEmp.phoneNum} onChange={this.handleNewEmpChange}  />
             </Form.Group>
           </Form.Row>
           <Form.Row>
@@ -151,4 +135,4 @@ const formStyle = {
   width: '60%'
 };
 
-export default EditEmployee;
+export default EditCustomer;
