@@ -232,7 +232,7 @@ class CustomerHome extends React.Component {
       </Card>
       <Card>
         <Card.Header as='h5'>Package Statistics</Card.Header>
-        <Card.Body><h5>Average Weight: { this.state.packages.map(p => Number(p.packageWeight.substr(0,p.packageWeight.indexOf('o')))).reduce((prev, curr) => prev+curr)/this.state.packages.size + 'oz' }</h5></Card.Body>
+        <Card.Body><h5>Average Weight: { (this.state.packages.map(p => Number(p.packageWeight.substr(0,p.packageWeight.indexOf('o')))).reduce((prev, curr) => prev+curr)/this.state.packages.size).toFixed(0) + 'oz' }</h5></Card.Body>
       </Card>
 
       <div style={{ marginTop: '2%' }}>

@@ -8,6 +8,7 @@ import signup from '../signup'
 import Manager from '../manager'
 import Tracking from '../tracking'
 import EditEmployee from '../editEmployee'
+import EditCustomer from '../editCustomer'
 
 const App = () => (
   <div>
@@ -28,6 +29,7 @@ const App = () => (
       <Route exact path='/manager' component={Manager} />
       <Route path='/tracking' component={Tracking} />
       <Route path='/employee/edit' component={EditEmployee}/>
+      <Route path='/customer/edit' component={EditEmployee}  />
     </main>
   </div>
 );

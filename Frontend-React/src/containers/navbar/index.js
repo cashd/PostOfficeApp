@@ -6,6 +6,7 @@ import Form from 'react-bootstrap/Form'
 import Button from 'react-bootstrap/Button'
 import { isAuth, isManager, existFacility } from '../../utils/auth';
 import Cookie from 'js-cookie'
+import { push } from 'connected-react-router'
 
 class Navigation extends React.Component {
   constructor(props) {
@@ -20,7 +21,7 @@ class Navigation extends React.Component {
     Cookie.remove('driverID');
     Cookie.remove('truckID');
     Cookie.remove('isManager');
-    window.location.reload()
+    push('/')
   };
 
     render() {
@@ -46,6 +47,7 @@ class Navigation extends React.Component {
                   { isManager() && existFacility() ? <Nav.Link href="/manager">Manage Facility</Nav.Link> : null }
                   <Nav.Link href="/tracking">Track Package</Nav.Link>
                   { Cookie.get('role') === 'employee' && existFacility() ? <Nav.Link href={"/employee/edit#" + Cookie.get('id')} >Edit Profile</Nav.Link> : null }
+                  { Cookie.get('role') === 'customer' ? <Nav.Link href={"/customer/edit#" + Cookie.get('id')} >Edit Profile</Nav.Link> : null }
                 </Nav>
                 <Form inline>
                   { isAuth() ? null : <Button href='/signup' variant="outline-light" style={{ marginRight: 22 }}>Signup</Button> }
