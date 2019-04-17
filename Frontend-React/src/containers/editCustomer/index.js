@@ -50,7 +50,7 @@ class EditCustomer extends React.Component {
 
     handleUpdateSubmit = () => {
     const emp = this.state.newEmp;
-    if (emp.workPhoneNum && emp.workEmail && emp.firstName && emp.lastName && emp.position && emp.salary && emp.zip && emp.address && emp.state && emp.city) {
+    if (emp.phoneNum && emp.email && emp.firstName && emp.lastName && emp.zip && emp.address && emp.state && emp.city) {
       apiPost('/customer/update', {
         ID: this.state.id,
         ...this.state.newEmp
