@@ -204,7 +204,7 @@ class Manager extends React.Component {
 
         <Modal show={this.state.showPackStatusReport} size='lg' onHide={this.openStatusReport}>
         <Modal.Header closeButton>
-          <Modal.Title>Customer Package Status Report</Modal.Title>
+          <Modal.Title>Facility Position Report</Modal.Title>
         </Modal.Header>
         <Modal.Body>
           <ResponsiveContainer width={'100%'} height={400}>
