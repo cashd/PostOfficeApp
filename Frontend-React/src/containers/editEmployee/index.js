@@ -96,6 +96,7 @@ class EditEmployee extends React.Component {
   render() {
     return (
       <div style={formStyle}>
+        { this.state.notification.is ? (<Alert variant={this.state.notification.type} dismissible> <Alert.Heading>{ this.state.notification.header }</Alert.Heading><p>{ this.state.notification.message }</p></Alert>): null }
         <Form.Row>
             <Form.Group as={Col} controlId='formGridFirstName'>
               <Form.Label> First Name </Form.Label>
