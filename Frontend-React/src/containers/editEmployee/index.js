@@ -23,11 +23,11 @@ class EditEmployee extends React.Component {
       newEmp: {
         firstName: '',
         lastName: '',
-        email: '',
+        workEmail: '',
         password: '',
         position: '',
         salary: '',
-        phoneNum: '',
+        workPhoneNum: '',
         zip: '',
         state: '',
         address: '',
@@ -38,12 +38,13 @@ class EditEmployee extends React.Component {
 };
     this.getEmployee = this.getEmployee.bind(this);
     this.handleNewEmpChange = this.handleNewEmpChange.bind(this);
+    this.handleUpdateSubmit = this.handleUpdateSubmit.bind(this);
     }
 
-  getEmployee = (payload) => {
-    apiPost('/employee/edit', payload)
+  getEmployee = () => {
+    apiPost('/employee/info', { id: this.state.id })
         .then((resp) => {
-          // do
+          this.setState({ newEmp: {resp} })
         })
         .catch((error) => {
           this.setState({ notification: { is: true, message: 'Could not edit employee.', type: 'danger', header: 'Error!' } })
@@ -57,8 +58,42 @@ class EditEmployee extends React.Component {
   };
 
   componentDidMount() {
-
+      this.getEmployee();
     };
+
+    handleUpdateSubmit = () => {
+    const emp = this.state.newEmp;
+    if (emp.phoneNum && emp.email && emp.password && emp.firstName && emp.lastName && emp.position && emp.salary && emp.zip && emp.address && emp.state && emp.city && emp.role && emp.role !== 'Choose...') {
+      apiPost('/employee/update', {
+        id: this.state.id,
+        ...this.state.newEmp
+      })
+        .then((resp) => {
+          console.log(resp);
+          if (resp.success === true) {
+            this.setState({ newEmp: {
+        firstName: '',
+        lastName: '',
+        workEmail: '',
+        password: '',
+        position: '',
+        salary: '',
+        workPhoneNum: '',
+        zip: '',
+        state: '',
+        address: '',
+        city: '',
+        role: 'Choose...',
+      }, notification: { is: true, message: 'Changed employee information.', type: 'success', header: 'Success!' } })
+          } else {
+            this.setState({ notification: { is: true, message: 'Could not add employee. Invalid input or employee already exist.', type: 'danger', header: 'Error!' } })
+          }
+        })
+        .catch(error => {
+          this.setState({ notification: { is: true, message: 'Could not add employee. Invalid input or employee already exist.', type: 'danger', header: 'Error!' } })
+        })
+    }
+  };
 
   render() {
     return (
@@ -76,7 +111,7 @@ class EditEmployee extends React.Component {
           <Form.Row>
             <Form.Group as={Col} controlId='formGridEmail'>
               <Form.Label> Work Email </Form.Label>
-              <Form.Control placeholder='example@website.com' name='email' value={this.state.newEmp.email} onChange={this.handleNewEmpChange} />
+              <Form.Control placeholder='example@website.com' name='email' value={this.state.newEmp.workEmail} onChange={this.handleNewEmpChange} />
             </Form.Group>
             <Form.Group as={Col} controlId='formGridPassword'>
               <Form.Label> Password </Form.Label>
@@ -94,7 +129,7 @@ class EditEmployee extends React.Component {
             </Form.Group>
             <Form.Group as={Col} controlId='formGridPhone'>
               <Form.Label> Work Phone </Form.Label>
-              <Form.Control placeholder='832-123-123' name='phoneNum' value={this.state.newEmp.phoneNum} onChange={this.handleNewEmpChange}  />
+              <Form.Control placeholder='832-123-123' name='phoneNum' value={this.state.newEmp.workPhoneNum} onChange={this.handleNewEmpChange}  />
             </Form.Group>
           </Form.Row>
           <Form.Row>
@@ -126,6 +161,7 @@ class EditEmployee extends React.Component {
               </Form.Control>
             </Form.Group>
           </Form.Row>
+        <Button variant='success' onClick={this.handleUpdateSubmit}> Submit </Button>
       </div>
     )
     }
@@ -137,8 +173,5 @@ const formStyle = {
   textAlign: 'center',
   width: '60%'
 };
-
-
-
 
 export default EditEmployee;

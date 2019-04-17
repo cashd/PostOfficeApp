@@ -204,7 +204,7 @@ class Manager extends React.Component {
 
         <Modal show={this.state.showPackStatusReport} size='lg' onHide={this.openStatusReport}>
         <Modal.Header closeButton>
-          <Modal.Title>Customer Package Status Report</Modal.Title>
+          <Modal.Title>Facility Position Report</Modal.Title>
         </Modal.Header>
         <Modal.Body>
           <ResponsiveContainer width={'100%'} height={400}>
@@ -327,6 +327,10 @@ class Manager extends React.Component {
             </BarChart>
           </Modal.Body>
         </Modal>
+        <Card>
+        <Card.Header as='h5'>Facility Statistics</Card.Header>
+        <Card.Body><h5>Average Salary: { '$' + (this.state.employees.map(e => e.salary).reduce((prev, curr) => prev+curr)/this.state.employees.size).toFixed(0)}</h5></Card.Body>
+      </Card>
 
         <h3 style={h3Style}>Employees</h3>
         <Table style={tableStyle} striped bordered hover>
