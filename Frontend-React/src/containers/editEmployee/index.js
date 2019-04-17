@@ -24,7 +24,6 @@ class EditEmployee extends React.Component {
         firstName: '',
         lastName: '',
         workEmail: '',
-        password: '',
         position: '',
         salary: '',
         workPhoneNum: '',
@@ -32,7 +31,6 @@ class EditEmployee extends React.Component {
         state: '',
         address: '',
         city: '',
-        role: 'Choose...',
       },
       notification: { is: false, message: '', type: '', header: '' }
 };
@@ -63,7 +61,7 @@ class EditEmployee extends React.Component {
 
     handleUpdateSubmit = () => {
     const emp = this.state.newEmp;
-    if (emp.phoneNum && emp.email && emp.password && emp.firstName && emp.lastName && emp.position && emp.salary && emp.zip && emp.address && emp.state && emp.city && emp.role && emp.role !== 'Choose...') {
+    if (emp.phoneNum && emp.email && emp.firstName && emp.lastName && emp.position && emp.salary && emp.zip && emp.address && emp.state && emp.city) {
       apiPost('/employee/update', {
         ID: this.state.id,
         ...this.state.newEmp
@@ -113,16 +111,12 @@ class EditEmployee extends React.Component {
               <Form.Label> Work Email </Form.Label>
               <Form.Control placeholder='example@website.com' name='email' value={this.state.newEmp.workEmail} onChange={this.handleNewEmpChange} />
             </Form.Group>
-            <Form.Group as={Col} controlId='formGridPassword'>
-              <Form.Label> Password </Form.Label>
-              <Form.Control type='password' placeholder='********' name='password' value={this.state.newEmp.password} onChange={this.handleNewEmpChange}  />
-            </Form.Group>
-          </Form.Row>
-          <Form.Row>
             <Form.Group as={Col} controlId='formGridPosition'>
               <Form.Label> Position </Form.Label>
               <Form.Control placeholder='Clerk' name='position' value={this.state.newEmp.position} onChange={this.handleNewEmpChange} />
             </Form.Group>
+          </Form.Row>
+          <Form.Row>
             <Form.Group as={Col} controlId='formGridSalary'>
               <Form.Label> Salary </Form.Label>
               <Form.Control placeholder='60000' name='salary' value={this.state.newEmp.salary} onChange={this.handleNewEmpChange}  />
@@ -150,15 +144,6 @@ class EditEmployee extends React.Component {
             <Form.Group as={Col} controlId='formGridState'>
               <Form.Label> State </Form.Label>
               <Form.Control name='state' value={this.state.newEmp.state} onChange={this.handleNewEmpChange}  />
-            </Form.Group>
-            <Form.Group as={Col} controlId="formGridRole">
-              <Form.Label> Role </Form.Label>
-              <Form.Control as="select" name='role' value={this.state.newEmp.role} onChange={this.handleNewEmpChange}>
-                <option>Choose...</option>
-                <option>Supervisor</option>
-                <option>Driver</option>
-                <option>Facility</option>
-              </Form.Control>
             </Form.Group>
           </Form.Row>
         <Button variant='success' onClick={this.handleUpdateSubmit}> Submit </Button>
