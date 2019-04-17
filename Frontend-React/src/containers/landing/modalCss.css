@@ -1,0 +1,10 @@
+.background22 {
+    background-image: url("landing1.png");
+
+    min-height: 100vh;
+    height: 100%;
+
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+;}

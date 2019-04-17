@@ -9,6 +9,7 @@ import Manager from '../manager'
 import Tracking from '../tracking'
 import EditEmployee from '../editEmployee'
 import EditCustomer from '../editCustomer'
+import '../landing/modalCss.css'
 
 const App = () => (
   <div>

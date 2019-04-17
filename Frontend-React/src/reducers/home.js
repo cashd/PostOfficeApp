@@ -34,7 +34,7 @@ export const getRoleCookie = () => {
             dispatch({ type: SET_ROLE_COOKIE, payload: { role: roleCookie } })
         } else {
             dispatch({ type: FAIL_ROLE_COOKIE })
-            dispatch(push('/login'))
+            //dispatch(push('/login'))
         }
     }
 };
