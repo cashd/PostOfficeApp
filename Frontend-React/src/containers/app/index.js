@@ -29,7 +29,7 @@ const App = () => (
       <Route exact path='/manager' component={Manager} />
       <Route path='/tracking' component={Tracking} />
       <Route path='/employee/edit' component={EditEmployee}/>
-      <Route path='/customer/edit' component={EditEmployee}  />
+      <Route path='/customer/edit' component={EditCustomer}  />
     </main>
   </div>
 );
