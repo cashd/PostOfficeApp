@@ -45,6 +45,7 @@ class Navigation extends React.Component {
                   <Nav.Link href="/">Home</Nav.Link>
                   { isManager() && existFacility() ? <Nav.Link href="/manager">Manage Facility</Nav.Link> : null }
                   <Nav.Link href="/tracking">Track Package</Nav.Link>
+                  { Cookie.get('role') === 'employee' && existFacility() ? <Nav.Link href={"/employee/edit#" + Cookie.get('id')} >Edit Profile</Nav.Link> : null }
                 </Nav>
                 <Form inline>
                   { isAuth() ? null : <Button href='/signup' variant="outline-light" style={{ marginRight: 22 }}>Signup</Button> }
