@@ -42,7 +42,7 @@ class EditEmployee extends React.Component {
     }
 
   getEmployee = () => {
-    apiPost('/employee/info', { id: this.state.id })
+    apiPost('/employee/info', { ID: this.state.id })
         .then((resp) => {
           this.setState({ newEmp: {resp} })
         })
@@ -65,7 +65,7 @@ class EditEmployee extends React.Component {
     const emp = this.state.newEmp;
     if (emp.phoneNum && emp.email && emp.password && emp.firstName && emp.lastName && emp.position && emp.salary && emp.zip && emp.address && emp.state && emp.city && emp.role && emp.role !== 'Choose...') {
       apiPost('/employee/update', {
-        id: this.state.id,
+        ID: this.state.id,
         ...this.state.newEmp
       })
         .then((resp) => {
