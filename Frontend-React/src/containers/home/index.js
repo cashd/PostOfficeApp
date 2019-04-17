@@ -5,6 +5,7 @@ import { connect } from 'react-redux'
 import { getRoleCookie } from '../../reducers/home'
 import CustomerHome from '../customerHome'
 import EmployeeHome from '../employeeHome'
+import Landing from '../landing'
 
 class Home extends React.Component {
     constructor(props) {
@@ -23,7 +24,7 @@ class Home extends React.Component {
             home =  <EmployeeHome />
         }
         else {
-            this.props.pushLogin()
+           home = <Landing />
         }
         return <div>
             {home}
