@@ -57,9 +57,9 @@ class CustomerHome extends React.Component {
   newPackageSubmit = () => {
     if (this.state.newPackEmail && this.state.newPackAddress && this.state.newPackWeight) {
       apiPost('/customer/newPackage', {
-        recipientEmail: this.props.newPackEmail,
-        recipientAddress: this.props.newPackAddress,
-        weight: this.props.newPackWeight,
+        recipientEmail: this.state.newPackEmail,
+        recipientAddress: this.state.newPackAddress,
+        weight: this.state.newPackWeight,
         senderID: this.state.id
       })
         .then(resp => {
