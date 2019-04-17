@@ -67,13 +67,13 @@ class EditCustomer extends React.Component {
         state: '',
         address: '',
         city: '',
-      }, notification: { is: true, message: 'Changed employee information.', type: 'success', header: 'Success!' } })
+      }, notification: { is: true, message: 'Changed customer information.', type: 'success', header: 'Success!' } })
           } else {
-            this.setState({ notification: { is: true, message: 'Could not add employee. Invalid input or employee already exist.', type: 'danger', header: 'Error!' } })
+            this.setState({ notification: { is: true, message: 'Could not edit customer info.', type: 'danger', header: 'Error!' } })
           }
         })
         .catch(error => {
-          this.setState({ notification: { is: true, message: 'Could not add employee. Invalid input or employee already exist.', type: 'danger', header: 'Error!' } })
+          this.setState({ notification: { is: true, message: 'Could not edit customer info.', type: 'danger', header: 'Error!' } })
         })
     }
   };
