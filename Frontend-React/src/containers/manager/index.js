@@ -40,7 +40,10 @@ class Manager extends React.Component {
       showNewEmp: false,
       showReport: false,
       showPackStatusReport: false,
+      showPackageReport: false,
+      selectedMonth: 'April',
       notification: { is: false, message: '', type: '', header: '' },
+      reportData: [],
       statusData: [],
 };
     this.makeTR = this.makeTR.bind(this);
@@ -51,6 +54,9 @@ class Manager extends React.Component {
     this.handleNewEmpSubmit = this.handleNewEmpSubmit.bind(this);
     this.renderCustomizedLabel = this.renderCustomizedLabel.bind(this);
     this.computeData = this.computeData.bind(this);
+    this.transformData = this.transformData.bind(this);
+    this.getPackageReport = this.getPackageReport.bind(this);
+    this.monthToInt = this.monthToInt.bind(this);
     }
 
   getEmployees = (payload) => {
@@ -65,11 +71,54 @@ class Manager extends React.Component {
         })
   };
 
+  monthToInt = (month) => {
+    switch (month) {
+      case 'January':
+        return 1
+      case 'February':
+        return 2
+      case 'March':
+        return 3
+      case 'April':
+        return 4
+      case 'May':
+        return 5
+      case 'June':
+        return 6
+      case 'July':
+        return 7
+      case 'August':
+        return 8
+      case 'September':
+        return 9
+      case 'October':
+        return 10
+      case 'November':
+        return 11
+      case 'December':
+        return 12
+      default:
+        return 0
+    }
+  };
+
+  getPackageReport = (month) => {
+    apiPost('/facility/report', { facilityID: this.state.facilityID, month: this.monthToInt(month) })
+      .then(resp => {
+        console.log(resp)
+        this.setState({ reportData: this.transformData(resp.list) })
+      })
+      .catch(error => {
+        console.log(error)
+      })
+  };
+
   componentDidMount() {
       this.getEmployees({
         managerID: this.state.id,
         facilityID: this.state.facilityID,
       });
+      this.getPackageReport('April')
     };
 
   makeTR = (e, id) => {
@@ -155,6 +204,12 @@ class Manager extends React.Component {
     this.setState({ statusData: data }, () => { console.log(this.state.statusData) })
   };
 
+  transformData = (data) => {
+    return data.map((d) => {
+      return { name: new Date(d.Date.substr(0,16)).getDay(), value: Number(d.value) }
+    })
+  };
+
     renderCustomizedLabel = ({
   cx, cy, midAngle, innerRadius, outerRadius, percent, index,
 }) => {
@@ -170,23 +225,6 @@ class Manager extends React.Component {
 };
 
   render() {
-    const data = [
-  {
-    name: 'January', Packages: 0, Employees: 0,
-  },
-  {
-    name: 'February', Packages: 0, Employees: 2,
-  },
-  {
-    name: 'March', Packages: 4, Employees: 3,
-  },
-  {
-    name: 'April', Packages: 12, Employees: this.state.employees.size,
-  },
-  {
-    name: 'May', Packages: 0, Employees: 0,
-  },
-];
     return (
       <div>
         { this.state.notification.is ? (<Alert variant={this.state.notification.type} dismissible> <Alert.Heading>{ this.state.notification.header }</Alert.Heading><p>{ this.state.notification.message }</p></Alert>): null }
@@ -311,7 +349,7 @@ class Manager extends React.Component {
             <BarChart
               width={500}
               height={300}
-              data={data}
+              data={this.state.reportData}
               margin={{
                 top: 5, right: 30, left: 20, bottom: 5,
               }}
@@ -322,8 +360,7 @@ class Manager extends React.Component {
             <YAxis />
             <Tooltip />
             <Legend />
-            <Bar dataKey="Packages" fill="#8884d8" />
-            <Bar dataKey="Employees" fill="#82ca9d" />
+            <Bar dataKey="value" fill="#8884d8" />
             </BarChart>
           </Modal.Body>
         </Modal>
