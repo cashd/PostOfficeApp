@@ -105,7 +105,7 @@ class Manager extends React.Component {
     apiPost('/facility/report', { facilityID: this.state.facilityID, month: this.monthToInt(month) })
       .then(resp => {
         console.log(resp)
-        this.setState({ reportData: this.transformData(resp.facilityEvents) }, () => console.log(this.state.reportData))
+        this.setState({ reportData: this.transformData(resp.list) }, () => console.log(this.state.reportData))
       })
       .catch(error => {
         console.log(error)
