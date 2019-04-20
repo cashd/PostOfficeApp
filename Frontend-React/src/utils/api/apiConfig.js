@@ -38,6 +38,8 @@ export const getJSONroute = (route) => {
       return 'api/routes/tracking.json';
     case '/facility/checkin':
       return 'api/routes/checkInPackage.json';
+    case '/facility/report':
+      return 'api/routes/facilityReports.json';
     default:
       return '';
   }

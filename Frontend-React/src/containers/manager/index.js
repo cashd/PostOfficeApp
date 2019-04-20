@@ -62,7 +62,6 @@ class Manager extends React.Component {
   getEmployees = (payload) => {
     apiPost('/facility/employees', payload)
         .then((resp) => {
-          console.log(resp);
           this.setState({ employees: List(resp.employees) }, this.computeData)
         })
         .catch((error) => {
@@ -137,6 +136,30 @@ class Manager extends React.Component {
         </React.Fragment>)
   };
 
+    makeTR3 = (e, id) => {
+      return (
+        <React.Fragment key={id}>
+          <tr>
+            <td> { e.id } </td>
+            <td> { e.firstName } </td>
+            <td> { e.lastName } </td>
+            <td> { e.position } </td>
+            <td> { e.workPhoneNum } </td>
+            <td> { e.workEmail } </td>
+          </tr>
+        </React.Fragment>)
+  };
+
+    makeTR2 = (e, id) => {
+      return (
+        <React.Fragment key={'asdf'+id}>
+          <tr>
+            <td> { e.name } </td>
+            <td>{ e.value }</td>
+          </tr>
+        </React.Fragment>)
+  };
+
   handleChangeNewEmpView = () => {
     this.setState({ showNewEmp: !this.state.showNewEmp })
   };
@@ -156,7 +179,6 @@ class Manager extends React.Component {
   };
 
   handleNewEmpSubmit = () => {
-    console.log(this.state.newEmp);
     const emp = this.state.newEmp;
     if (emp.phoneNum && emp.email && emp.password && emp.firstName && emp.lastName && emp.position && emp.salary && emp.zip && emp.address && emp.state && emp.city && emp.role && emp.role !== 'Choose...') {
       apiPost('/manager/addEmployee', {
@@ -165,7 +187,6 @@ class Manager extends React.Component {
         ...this.state.newEmp
       })
         .then((resp) => {
-          console.log(resp);
           if (resp.success === true) {
             window.location.reload()
           } else {
@@ -188,12 +209,9 @@ class Manager extends React.Component {
       { name: 'Driver', value: 0 },
       { name: 'Carrier', value: 0 }
     ];
-    console.log(this.state.employees);
     this.state.employees.forEach((e) => {
-      console.log(e)
       for (let i=0; i < 6; i++) {
         if (e.position === data[i].name) {
-          console.log(e.position, data[i].name);
           data[i].value += 1
         }
       }
@@ -206,7 +224,8 @@ class Manager extends React.Component {
 
   transformData = (data) => {
     return data.map((d) => {
-      return { name: new Date(d.Date.substr(0,16)).getDay(), value: Number(d.value) }
+      console.log(d)
+      return { name: Number(d.Date), value: Number(d.count) }
     })
   };
 
@@ -262,6 +281,21 @@ class Manager extends React.Component {
               </Pie>
             </PieChart>
           </ResponsiveContainer>
+                  <Table style={tableStyle} striped bordered hover>
+          <thead>
+            <tr>
+              <th>#</th>
+              <th>First Name</th>
+              <th>Last Name</th>
+              <th>Position</th>
+              <th>Work Phone</th>
+              <th>Work Email</th>
+            </tr>
+          </thead>
+          <tbody>
+          { this.state.employees.map((e) => { return this.makeTR3(e, e.id) }) }
+          </tbody>
+    </Table>
         </Modal.Body>
         <Modal.Footer>
         </Modal.Footer>
@@ -346,20 +380,32 @@ class Manager extends React.Component {
           <Modal.Title>Review Facility Report</Modal.Title>
           </Modal.Header>
           <Modal.Body>
-                  <AreaChart
-        width={500}
+            <h6 style={{ textAlign: 'center' }}>Number of Packages arriving to this facility each day.</h6>
+            <AreaChart
+        width={600}
         height={400}
         data={this.state.reportData}
         margin={{
-          top: 10, right: 30, left: 0, bottom: 0,
+          top: 10, right: 0, left: 120, bottom: 0,
         }}
       >
         <CartesianGrid strokeDasharray="3 3" />
         <XAxis dataKey="name" />
-        <YAxis />
+        <YAxis dataKey="value"/>
         <Tooltip />
-        <Area type="monotone" dataKey="uv" stroke="#8884d8" fill="#8884d8" />
+        <Area type="monotone" dataKey="value" stroke="#8884d8" fill="#8884d8" />
       </AreaChart>
+            <Table style={tableStyle} striped bordered hover>
+          <thead>
+            <tr>
+              <th>Day of Month</th>
+              <th>Value</th>
+            </tr>
+          </thead>
+          <tbody>
+          { this.state.reportData.map((e) => { return this.makeTR2(e, e.id) }) }
+          </tbody>
+    </Table>
           </Modal.Body>
         </Modal>
         <Card>
