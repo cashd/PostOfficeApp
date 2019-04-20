@@ -225,7 +225,7 @@ class Manager extends React.Component {
   transformData = (data) => {
     return data.map((d) => {
       console.log(d)
-      return { name: Number(d.Date), value: Number(d.count) }
+      return { name: Number(d.Date), value: Number(d.value) }
     })
   };
 

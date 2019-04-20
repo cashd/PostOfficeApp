@@ -2,19 +2,19 @@
   "facilityEvents": [
     {
       "Date": 1,
-      "count": 4
+      "value": 4
     },
     {
       "Date": 2,
-      "count": 7
+      "value": 7
     },
     {
       "Date": 3,
-      "count": 1
+      "value": 1
     },
     {
       "Date": 4,
-      "count": 10
+      "value": 10
     }
   ]
 }
