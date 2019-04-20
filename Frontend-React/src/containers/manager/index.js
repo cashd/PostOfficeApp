@@ -11,8 +11,8 @@ import { List } from 'immutable'
 import { apiPost } from '../../utils/api'
 import Alert from 'react-bootstrap/Alert';
 import {
-  BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer, PieChart, Pie, Cell,
-} from 'recharts';
+  BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer, PieChart, Pie, Cell, AreaChart, Area
+} from 'recharts'
 
 
 class Manager extends React.Component {
@@ -106,7 +106,7 @@ class Manager extends React.Component {
     apiPost('/facility/report', { facilityID: this.state.facilityID, month: this.monthToInt(month) })
       .then(resp => {
         console.log(resp)
-        this.setState({ reportData: this.transformData(resp.facilityEvents) })
+        this.setState({ reportData: this.transformData(resp.facilityEvents) }, () => console.log(this.state.reportData))
       })
       .catch(error => {
         console.log(error)
@@ -341,27 +341,25 @@ class Manager extends React.Component {
           </Modal.Footer>
         </Modal>
 
-        <Modal show={this.state.showReport} onHide={this.handleChangeReportView} name='ShowReport'>
+        <Modal show={this.state.showReport} onHide={this.handleChangeReportView} name='ShowReport' size='lg'>
           <Modal.Header closeButton>
           <Modal.Title>Review Facility Report</Modal.Title>
           </Modal.Header>
           <Modal.Body>
-            <BarChart
-              width={500}
-              height={300}
-              data={this.state.reportData}
-              margin={{
-                top: 5, right: 30, left: 20, bottom: 5,
-              }}
-              style={{marginLeft: '-7%'}}
-            >
-            <CartesianGrid strokeDasharray="3 3" />
-            <XAxis dataKey="name" />
-            <YAxis />
-            <Tooltip />
-            <Legend />
-            <Bar dataKey="value" fill="#8884d8" />
-            </BarChart>
+                  <AreaChart
+        width={500}
+        height={400}
+        data={this.state.reportData}
+        margin={{
+          top: 10, right: 30, left: 0, bottom: 0,
+        }}
+      >
+        <CartesianGrid strokeDasharray="3 3" />
+        <XAxis dataKey="name" />
+        <YAxis />
+        <Tooltip />
+        <Area type="monotone" dataKey="uv" stroke="#8884d8" fill="#8884d8" />
+      </AreaChart>
           </Modal.Body>
         </Modal>
         <Card>
