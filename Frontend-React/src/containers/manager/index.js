@@ -393,7 +393,7 @@ class Manager extends React.Component {
         <XAxis dataKey="name" />
         <YAxis dataKey="value"/>
         <Tooltip />
-        <Area type="monotone" dataKey="value" stroke="#8884d8" fill="#8884d8" />
+        <Area type="monotone" dataKey="value" stroke="#c61313" fill="#c61313" />
       </AreaChart>
             <Table style={tableStyle} striped bordered hover>
           <thead>
@@ -410,7 +410,9 @@ class Manager extends React.Component {
         </Modal>
         <Card>
         <Card.Header as='h5'>Facility Statistics</Card.Header>
-        <Card.Body><h5>Average Salary: { '$' + (this.state.employees.map(e => e.salary).reduce((prev, curr) => prev+curr)/this.state.employees.size).toFixed(0)}</h5></Card.Body>
+        <Card.Body><h5>Average Salary: { '$' + (this.state.employees.map(e => e.salary).reduce((prev, curr) => prev+curr)/this.state.employees.size).toFixed(0)}</h5>
+        <h5>Number of Employees: { this.state.employees.size }</h5>
+        </Card.Body>
       </Card>
 
         <h3 style={h3Style}>Employees</h3>
