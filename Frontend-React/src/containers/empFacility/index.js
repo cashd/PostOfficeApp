@@ -112,7 +112,7 @@ class EmpFacility extends React.Component {
   };
 
   handleMoveButton = (event) => {
-    console.log(this.state.selectedPackages);
+    console.log(this.state.selectedPackages, this.state.selectedTruck, this.state.selectedTruckID);
     const state = this.state;
     if (state.selectedTruck !== 'Choose a Truck' && state.selectedPackages.size !== 0)
       apiPost('/facility/move', { packages: state.selectedPackages, facilityID: state.facilityID, truckID: state.selectedTruckID } )
