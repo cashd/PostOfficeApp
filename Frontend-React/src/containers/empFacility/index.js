@@ -130,7 +130,7 @@ class EmpFacility extends React.Component {
   };
 
   handleTruckChange = (event) => {
-    this.setState({ selectedTruckID: event.target.key, selectedTruck: event.target.value });
+    this.setState({ selectedTruckID: event.target.name, selectedTruck: event.target.value });
   };
 
   handleCheckInButton = () => {
@@ -176,7 +176,7 @@ class EmpFacility extends React.Component {
                 <Form.Group as={Col}>
                   <Form.Control as='select' value={this.state.selectedTruck} onChange={this.handleTruckChange}>
                     <option>Choose a Truck</option>
-                    { this.state.trucks.map((truck) => {return (<option key={truck.truckID}>{truck.truckID + ' - ' + truck.driverFirstName + ' ' + truck.driverLastName + ' - ' + truck.type}</option>)}) }
+                    { this.state.trucks.map((truck) => {return (<option name={truck.truckID} key={truck.truckID}>{truck.truckID + ' - ' + truck.driverFirstName + ' ' + truck.driverLastName + ' - ' + truck.type}</option>)}) }
                   </Form.Control>
               </Form.Group>
               </Form.Row>
