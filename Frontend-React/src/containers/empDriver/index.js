@@ -173,8 +173,8 @@ class EmpDriver extends React.Component {
               { this.state.type === 'Delivery' ? <th>Deliver</th> : null }
               <th>#</th>
               <th>Sender Email</th>
-              <th>Sender Address</th>
               <th>Recipient Email</th>
+              <th>Sender Address</th>
               <th>Recipient Address</th>
               <th>Delivery Status</th>
               <th>Weight</th>
