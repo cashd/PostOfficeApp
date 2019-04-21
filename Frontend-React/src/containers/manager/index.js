@@ -496,7 +496,7 @@ class Manager extends React.Component {
 
         <Card>
         <Card.Header as='h5'>Facility Statistics</Card.Header>
-        <Card.Body><h5>Average Salary: { '$' + (this.state.employees.map(e => e.salary).reduce((prev, curr) => prev+curr)/this.state.employees.size).toFixed(0)}</h5>
+        <Card.Body><h5>Average Salary: { '$' + (this.state.employees.map(e => e.salary).reduce((prev, curr) => prev+curr, 0)/this.state.employees.size).toFixed(0)}</h5>
         <h5>Number of Employees: { this.state.employees.size }</h5>
         </Card.Body>
       </Card>
