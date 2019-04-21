@@ -274,6 +274,7 @@ class Manager extends React.Component {
               <Button size='lg' variant="success" style={ControlButtonStyle} onClick={this.handleChangeNewEmpView}>Add Employee</Button>
               <Button size='lg' variant="info" style={ControlButtonStyle} onClick={this.handleChangeReportView}>Review Facility Report</Button>
               <Button style={ControlButtonStyle} size='lg' variant='dark' onClick={this.openStatusReport}>Review Employee Role Report</Button>
+              <Button style={ControlButtonStyle} size='lg' variant='warning' onClick={this.openRevenueReport}>Review Revenue Report</Button>
             </Card.Body>
           </Card>
         </div>
@@ -442,12 +443,12 @@ class Manager extends React.Component {
           </Modal.Body>
         </Modal>
 
-                <Modal show={this.state.showReport} onHide={this.handleChangeReportView} name='ShowReport' size='lg'>
+        <Modal show={this.state.showRevenueReport} onHide={this.openRevenueReport} name='ShowReport' size='lg'>
           <Modal.Header closeButton>
           <Modal.Title>Review Revenue Report</Modal.Title>
           </Modal.Header>
           <Modal.Body>
-            <h6 style={{ textAlign: 'center' }}>Number of Packages arriving to this facility each day.</h6>
+            <h6 style={{ textAlign: 'center' }}>Revenue of all facilities per day of this month.</h6>
             <AreaChart
         width={600}
         height={400}
@@ -460,13 +461,13 @@ class Manager extends React.Component {
         <XAxis dataKey="name" />
         <YAxis dataKey="value"/>
         <Tooltip />
-        <Area type="monotone" dataKey="value" stroke="#c61313" fill="#c61313" />
+        <Area type="monotone" dataKey="value" stroke="#2ecc63" fill="#2ecc63" />
       </AreaChart>
             <Table style={tableStyle} striped bordered hover>
           <thead>
             <tr>
               <th>Day of Month</th>
-              <th>Value</th>
+              <th>Revenue</th>
             </tr>
           </thead>
           <tbody>
