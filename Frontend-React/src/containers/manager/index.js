@@ -7,6 +7,7 @@ import Form from 'react-bootstrap/Form'
 import Col from 'react-bootstrap/Col'
 import Card from 'react-bootstrap/Card'
 import Table from 'react-bootstrap/Table'
+import ButtonGroup from 'react-bootstrap/ButtonGroup'
 import { List } from 'immutable'
 import { apiPost } from '../../utils/api'
 import Alert from 'react-bootstrap/Alert';
@@ -41,10 +42,12 @@ class Manager extends React.Component {
       showReport: false,
       showPackStatusReport: false,
       showPackageReport: false,
+      showRevenueReport: false,
       selectedMonth: 'April',
       notification: { is: false, message: '', type: '', header: '' },
       reportData: [],
       statusData: [],
+      revenueData: [],
 };
     this.makeTR = this.makeTR.bind(this);
     this.handleChangeNewEmpView = this.handleChangeNewEmpView.bind(this);
@@ -57,6 +60,7 @@ class Manager extends React.Component {
     this.transformData = this.transformData.bind(this);
     this.getPackageReport = this.getPackageReport.bind(this);
     this.monthToInt = this.monthToInt.bind(this);
+    this.openRevenueReport = this.openRevenueReport.bind(this);
     }
 
   getEmployees = (payload) => {
@@ -68,6 +72,16 @@ class Manager extends React.Component {
           this.setState({ notification: { is: true, message: 'Could not get employees', type: 'danger', header: 'Error!' } })
 
         })
+  };
+
+  getRevenueData = (month) => {
+    apiPost('/package/reportRev', { month: this.monthToInt(month) })
+      .then(resp => {
+        this.setState({ revenueData: this.transformData(resp.list) }, () => console.log(this.state.revenueData))
+      })
+      .catch(error => {
+        console.log(error)
+      })
   };
 
   monthToInt = (month) => {
@@ -117,7 +131,8 @@ class Manager extends React.Component {
         managerID: this.state.id,
         facilityID: this.state.facilityID,
       });
-      this.getPackageReport('April')
+      this.getPackageReport('April');
+      this.getPackageReport('April');
     };
 
   makeTR = (e, id) => {
@@ -170,6 +185,10 @@ class Manager extends React.Component {
 
   openStatusReport = () => {
     this.setState({ showPackStatusReport: !this.state.showPackStatusReport })
+  };
+
+  openRevenueReport = () => {
+    this.setState({ showRevenueReport: !this.state.showRevenueReport })
   };
 
   handleNewEmpChange = (event) => {
@@ -380,6 +399,20 @@ class Manager extends React.Component {
           <Modal.Title>Review Facility Report</Modal.Title>
           </Modal.Header>
           <Modal.Body>
+            <ButtonGroup aria-label="Basic example" style={{ marginLeft: '11%' }}>
+              <Button variant="dark" value='January' onClick={(e) => { this.getPackageReport(e.target.value) }}>Jan</Button>
+              <Button variant="dark" value='February' onClick={(e) => { this.getPackageReport(e.target.value) }}>Feb</Button>
+              <Button variant="dark" value='March' onClick={(e) => { this.getPackageReport(e.target.value) }}>Mar</Button>
+              <Button variant="dark" value='April' onClick={(e) => { this.getPackageReport(e.target.value) }}>Apr</Button>
+              <Button variant="dark" value='May' onClick={(e) => { this.getPackageReport(e.target.value) }}>May</Button>
+              <Button variant="dark" value='June' onClick={(e) => { this.getPackageReport(e.target.value) }}>Jun</Button>
+              <Button variant="dark" value='July' onClick={(e) => { this.getPackageReport(e.target.value) }}>Jul</Button>
+              <Button variant="dark" value='August' onClick={(e) => { this.getPackageReport(e.target.value) }}>Aug</Button>
+              <Button variant="dark" value='September' onClick={(e) => { this.getPackageReport(e.target.value) }}>Sep</Button>
+              <Button variant="dark" value='October' onClick={(e) => { this.getPackageReport(e.target.value) }}>Oct</Button>
+              <Button variant="dark" value='November' onClick={(e) => { this.getPackageReport(e.target.value) }}>Nov</Button>
+              <Button variant="dark" value='December' onClick={(e) => { this.getPackageReport(e.target.value) }}>Dec</Button>
+            </ButtonGroup>
             <h6 style={{ textAlign: 'center' }}>Number of Packages arriving to this facility each day.</h6>
             <AreaChart
         width={600}
@@ -408,6 +441,42 @@ class Manager extends React.Component {
     </Table>
           </Modal.Body>
         </Modal>
+
+                <Modal show={this.state.showReport} onHide={this.handleChangeReportView} name='ShowReport' size='lg'>
+          <Modal.Header closeButton>
+          <Modal.Title>Review Revenue Report</Modal.Title>
+          </Modal.Header>
+          <Modal.Body>
+            <h6 style={{ textAlign: 'center' }}>Number of Packages arriving to this facility each day.</h6>
+            <AreaChart
+        width={600}
+        height={400}
+        data={this.state.revenueData}
+        margin={{
+          top: 10, right: 0, left: 120, bottom: 0,
+        }}
+      >
+        <CartesianGrid strokeDasharray="3 3" />
+        <XAxis dataKey="name" />
+        <YAxis dataKey="value"/>
+        <Tooltip />
+        <Area type="monotone" dataKey="value" stroke="#c61313" fill="#c61313" />
+      </AreaChart>
+            <Table style={tableStyle} striped bordered hover>
+          <thead>
+            <tr>
+              <th>Day of Month</th>
+              <th>Value</th>
+            </tr>
+          </thead>
+          <tbody>
+          { this.state.revenueData.map((e) => { return this.makeTR2(e, e.id) }) }
+          </tbody>
+    </Table>
+          </Modal.Body>
+        </Modal>
+
+
         <Card>
         <Card.Header as='h5'>Facility Statistics</Card.Header>
         <Card.Body><h5>Average Salary: { '$' + (this.state.employees.map(e => e.salary).reduce((prev, curr) => prev+curr)/this.state.employees.size).toFixed(0)}</h5>
