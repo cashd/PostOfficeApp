@@ -449,6 +449,20 @@ class Manager extends React.Component {
           <Modal.Title>Review Revenue Report</Modal.Title>
           </Modal.Header>
           <Modal.Body>
+            <ButtonGroup aria-label="Basic example" style={{ marginLeft: '11%' }}>
+              <Button variant="dark" value='January' onClick={(e) => { this.getRevenueData(e.target.value) }}>Jan</Button>
+              <Button variant="dark" value='February' onClick={(e) => { this.getRevenueData(e.target.value) }}>Feb</Button>
+              <Button variant="dark" value='March' onClick={(e) => { this.getRevenueData(e.target.value) }}>Mar</Button>
+              <Button variant="dark" value='April' onClick={(e) => { this.getRevenueData(e.target.value) }}>Apr</Button>
+              <Button variant="dark" value='May' onClick={(e) => { this.getRevenueData(e.target.value) }}>May</Button>
+              <Button variant="dark" value='June' onClick={(e) => { this.getRevenueData(e.target.value) }}>Jun</Button>
+              <Button variant="dark" value='July' onClick={(e) => { this.getRevenueData(e.target.value) }}>Jul</Button>
+              <Button variant="dark" value='August' onClick={(e) => { this.getRevenueData(e.target.value) }}>Aug</Button>
+              <Button variant="dark" value='September' onClick={(e) => { this.getRevenueData(e.target.value) }}>Sep</Button>
+              <Button variant="dark" value='October' onClick={(e) => { this.getRevenueData(e.target.value) }}>Oct</Button>
+              <Button variant="dark" value='November' onClick={(e) => { this.getRevenueData(e.target.value) }}>Nov</Button>
+              <Button variant="dark" value='December' onClick={(e) => { this.getRevenueData(e.target.value) }}>Dec</Button>
+            </ButtonGroup>
             <h6 style={{ textAlign: 'center' }}>Revenue of all facilities per day of this month.</h6>
             <h6 style={{ textAlign: 'center' }}>Total Revenue = { this.state.revenueData.reduce((prev, curr) => prev+curr) }</h6>
             <AreaChart
