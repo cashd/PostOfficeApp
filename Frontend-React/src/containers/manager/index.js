@@ -77,6 +77,7 @@ class Manager extends React.Component {
   getRevenueData = (month) => {
     apiPost('/package/reportRev', { month: this.monthToInt(month) })
       .then(resp => {
+        console.log(resp)
         this.setState({ revenueData: this.transformData(resp.list) }, () => console.log(this.state.revenueData))
       })
       .catch(error => {
@@ -132,7 +133,7 @@ class Manager extends React.Component {
         facilityID: this.state.facilityID,
       });
       this.getPackageReport('April');
-      this.getPackageReport('April');
+      this.getRevenueData('April');
     };
 
   makeTR = (e, id) => {
