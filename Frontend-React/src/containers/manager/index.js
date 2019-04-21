@@ -464,7 +464,7 @@ class Manager extends React.Component {
               <Button variant="dark" value='December' onClick={(e) => { this.getRevenueData(e.target.value) }}>Dec</Button>
             </ButtonGroup>
             <h6 style={{ textAlign: 'center' }}>Revenue of all facilities per day of this month.</h6>
-            <h6 style={{ textAlign: 'center' }}>Total Revenue = { this.state.revenueData.reduce((prev, curr) => prev+curr, 0) }</h6>
+            <h6 style={{ textAlign: 'center' }}>Total Revenue = { this.state.revenueData.reduce((prev, curr) => prev.value+curr.value, 0) }</h6>
             <AreaChart
         width={600}
         height={400}
