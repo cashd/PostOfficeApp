@@ -450,6 +450,7 @@ class Manager extends React.Component {
           </Modal.Header>
           <Modal.Body>
             <h6 style={{ textAlign: 'center' }}>Revenue of all facilities per day of this month.</h6>
+            <h6 style={{ textAlign: 'center' }}>Total Revenue = { this.state.revenueData.reduce((prev, curr) => prev+curr) }</h6>
             <AreaChart
         width={600}
         height={400}
