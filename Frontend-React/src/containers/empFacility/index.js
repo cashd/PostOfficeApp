@@ -25,6 +25,7 @@ class EmpFacility extends React.Component {
       notification: { is: false, message: '', type: '', header: '' },
       showCheckIn: false,
       checkInPackageID: '',
+      selectedTruckID: 0,
     };
 
     this.makeTR = this.makeTR.bind(this);
@@ -114,7 +115,7 @@ class EmpFacility extends React.Component {
     console.log(this.state.selectedPackages);
     const state = this.state;
     if (state.selectedTruck !== 'Choose a Truck' && state.selectedPackages.size !== 0)
-      apiPost('/facility/move', { packages: state.selectedPackages, facilityID: state.facilityID, truckID: Number(state.selectedTruck[0]) } )
+      apiPost('/facility/move', { packages: state.selectedPackages, facilityID: state.facilityID, truckID: state.selectedTruckID } )
         .then(resp => {
           console.log(resp);
           if (resp.success) {
@@ -129,7 +130,7 @@ class EmpFacility extends React.Component {
   };
 
   handleTruckChange = (event) => {
-    this.setState({ selectedTruck: event.target.value });
+    this.setState({ selectedTruckID: event.target.key, selectedTruck: event.target.value });
   };
 
   handleCheckInButton = () => {
